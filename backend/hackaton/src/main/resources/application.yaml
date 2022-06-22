@@ -7,22 +7,27 @@ server:
 #      timeout: 60s
 spring:
   datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:tournamentDB
-    username: sa
-    password:
+    sslmode: require
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://ec2-44-206-89-185.compute-1.amazonaws.com:5432/df7bei5oqt8ouc
+    username: wndobaytuzibvw
+    password: 17bba88b52d94558cddbc8c061745e8c6e82e9be0e08ad922f5d19535329e52a
   jpa:
-    show-sql: false
+    show-sql: true
     hibernate:
       ddl-auto: update
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.H2Dialect
+        dialect: org.hibernate.dialect.PostgreSQLDialect
 
-  h2:
-    console:
-      enabled: true
+
+#  h2:
+#    console:
+#      enabled: true
   flyway:
-    url: jdbc:h2:mem:tournamentDB
-    user: sa
-    password:
+    sslmode: required
+    url: jdbc:postgresql://ec2-44-206-89-185.compute-1.amazonaws.com:5432/df7bei5oqt8ouc
+    user: wndobaytuzibvw
+    password: 17bba88b52d94558cddbc8c061745e8c6e82e9be0e08ad922f5d19535329e52a
+#    enabled: true
+#    locations: classpath:db/migrations
