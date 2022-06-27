@@ -2,7 +2,6 @@ import { useCallback, useEffect, useState } from "react";
 import isEmpty from "./checkEmpty";
 
 async function tournamentList() {
-  const token = sessionStorage.getItem("token");
   try {
     const req = await fetch(
       "http://localhost:8189/api/v1/app/tournament/tourney/started",
@@ -12,7 +11,7 @@ async function tournamentList() {
           "Content-Type": "application/json",
           Accept: "application/json",
           // "Access-Control-Allow-Origin": "*",
-          Authorization: `Bearer ${token}`,
+          // Authorization: `Bearer ${token}`,
         },
       }
     );
@@ -48,25 +47,42 @@ export default function ActiveTournaments() {
     }
   }, [showTournament]);
 
+  let tournamentImg = "default";
+
   if (isTournament) {
     return (
       <div className="tournamentList">
         {tournament.map((elem) => {
+          if (
+            elem.type === "UFC" ||
+            elem.type === "MortalKombat" ||
+            elem.type === "Tennis" ||
+            elem.type === "Fifa"
+          ) {
+            tournamentImg = elem.type;
+          } else {
+            tournamentImg = "default";
+          }
           return (
             <div className="tournamentInfo" key={elem.name}>
-              <a href={`/active/${elem.id}`}>
-                <div className="tournamentName">{elem.name}</div>
-                <div className="tournamentGame">{elem.type}</div>
-                <div className="tournamentDescription">{elem.description}</div>
-                <div className="tournamentPlayers">
-                  <img
-                    src="https://png.pngtree.com/png-vector/20191017/ourlarge/pngtree-gamepad-icon-png-image_1821905.jpg"
-                    width={25}
-                    alt="Players"
-                  />{" "}
-                  {elem.participants}
-                </div>
-              </a>
+              <div className="tournamentImg">
+                <img
+                  src={`logos/${tournamentImg}.jpg`}
+                  alt="tournamentImg"
+                  width={200}
+                  height={100}
+                />
+              </div>
+              <div className="tournamentName">{elem.name}</div>
+              <div className="tournamentGame">{elem.type}</div>
+              <div className="tournamentDescription">{elem.description}</div>
+              <div className="tournamentPlayers">
+                <img src={`logos/gamePad.png`} width={25} alt="Players" />{" "}
+                {elem.participants}
+              </div>
+              <div className="viewTournaments">
+                <a href={`/active/${elem.id}`}>View</a>
+              </div>
             </div>
           );
         })}

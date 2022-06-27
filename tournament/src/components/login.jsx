@@ -1,4 +1,4 @@
-import { Formik, Field, ErrorMessage } from "formik";
+import { Formik, Field } from "formik";
 import { ChakraProvider } from "@chakra-ui/react";
 import {
   Box,
@@ -14,9 +14,15 @@ import {
 export default function Login() {
   return (
     <ChakraProvider>
-      <Flex bg="gray.100" align="center" justify="center" h="100vh">
-        <Box bg="white" p={6} rounded="md" w={64}>
+      <Flex
+        bg="rgba(39, 42, 51, 0.95)"
+        align="center"
+        justify="center"
+        h="100vh"
+      >
+        <Box bg="#23252d" p={6} rounded="md" w={64}>
           <Formik
+            bg="#23252d"
             initialValues={{
               login: "",
               password: "",
@@ -72,7 +78,9 @@ export default function Login() {
                 <VStack spacing={4} align="flex-start">
                   {/* <FormControl isInvalid={!!errors.name && touched.name}> */}
                   <FormControl>
-                    <FormLabel htmlFor="text">Login</FormLabel>
+                    <FormLabel color="white" htmlFor="text">
+                      Login
+                    </FormLabel>
                     <Field
                       as={Input}
                       id="login"
@@ -84,7 +92,9 @@ export default function Login() {
                   <FormControl
                     isInvalid={!!errors.password && touched.password}
                   >
-                    <FormLabel htmlFor="password">Password</FormLabel>
+                    <FormLabel color="white" htmlFor="password">
+                      Password
+                    </FormLabel>
                     <Field
                       as={Input}
                       id="password"

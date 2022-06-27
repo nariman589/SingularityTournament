@@ -7,9 +7,13 @@ import Header from "./header";
 import ReactLoading from "react-loading";
 import JoinTourney from "./joinTournament";
 import StartButton from "./startButton";
+import AlertMessage from "./alert";
 
 async function tournamentDetails(id) {
   const token = sessionStorage.getItem("token");
+  if (!token) {
+    AlertMessage("You must be authorized", "error");
+  }
   try {
     const req = await fetch(
       `http://localhost:8189/api/v1/app/tournament/tourney/id/${id}`,
@@ -24,8 +28,8 @@ async function tournamentDetails(id) {
     );
     const res = await req.json();
     return res;
-  } catch {
-    console.log("error");
+  } catch (err) {
+    AlertMessage("myMessage", "success");
   }
 }
 
@@ -52,7 +56,7 @@ export default function TournamentPage() {
 
   if (doWeHaveToken() && !isEmpty(tournamentTable)) {
     return (
-      <ChakraProvider>
+      <div className="tournamentPage">
         <Header />
         <div className="participantsInfo">
           <div className="mainPageTitle">
@@ -66,33 +70,35 @@ export default function TournamentPage() {
 
             <JoinTourney id={tournamentTable.id} />
 
-            <div className="participantsInfoDescr">
-              <div className="participantsListTtile">
-                Tournament Desctiption
+            <div className="participantsElemetsDiv">
+              <div className="participantsInfoDescr">
+                <div className="participantsListTtile">
+                  Tournament Desctiption
+                </div>
+                {tournamentTable.description}
               </div>
-              {tournamentTable.description}
-            </div>
-            <div className="participantsList">
-              <div className="participantsListTtile">Participants</div>
-              {tournamentTable.list.map((elem) => {
-                return (
-                  <div
-                    key={elem.login}
-                    className="participant"
-                  >{`${elem.lastName} ${elem.firstName} (${elem.major})`}</div>
-                );
-              })}
+              <div className="participantsList">
+                <div className="participantsListTtile">Participants</div>
+                {tournamentTable.list.map((elem) => {
+                  return (
+                    <div
+                      key={elem.login}
+                      className="participant"
+                    >{`${elem.lastName} ${elem.firstName} (${elem.major})`}</div>
+                  );
+                })}
+              </div>
             </div>
             <StartButton id={id} />
           </div>
         </div>
-      </ChakraProvider>
+      </div>
     );
   }
   return (
-    <ChakraProvider>
+    <div className="tournamentPage">
       <Header />
       <ReactLoading color={"orange"} className="center" />
-    </ChakraProvider>
+    </div>
   );
 }

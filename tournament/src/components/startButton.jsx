@@ -1,10 +1,12 @@
+import AlertMessage from "./alert";
+
 export default function StartButton(id) {
   return (
     <button
       onClick={() => {
         start(id);
       }}
-      className="closing-button"
+      className="sliding-button"
     >
       <span>Start</span>
     </button>
@@ -27,8 +29,7 @@ async function start(id) {
       }
     );
     const res = await req.json();
-    alert(res.message);
-    window.location.pathname = "/";
+    AlertMessage(res.message, "succes");
   } catch (error) {
     console.log(error);
   }

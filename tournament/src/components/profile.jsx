@@ -32,24 +32,26 @@ export default function Profile() {
 
   if (doWeHaveToken() && !isEmpty(user)) {
     return (
-      <ChakraProvider>
+      <div className="profilePage">
         <Header />
         <div className="ProfileInfo">
-          <div className="ProfilePageTitile">Profile Info</div>
+          <div className="mainPageTitle">
+            <h2>Profile Info</h2>
+          </div>
           <div className="ProfileDetails">
-            <div className="ProfileInfoField">firstname: {user.firstName}</div>
-            <div className="ProfileInfoField">lastname: {user.lastName}</div>
+            <div className="ProfileInfoField">Firstname: {user.firstName}</div>
+            <div className="ProfileInfoField">Lastname: {user.lastName}</div>
             <div className="ProfileInfoField">Major: {user.major}</div>
-            <div className="ProfileInfoField">login: {user.login}</div>
+            <div className="ProfileInfoField">Login: {user.login}</div>
           </div>
         </div>
-      </ChakraProvider>
+      </div>
     );
   }
   return (
-    <ChakraProvider>
+    <div className="profilePage">
       <Header />
       <ReactLoading color={"orange"} className="center" />
-    </ChakraProvider>
+    </div>
   );
 }

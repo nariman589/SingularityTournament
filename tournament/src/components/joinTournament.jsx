@@ -4,7 +4,7 @@ export default function JoinTourney(id) {
       onClick={() => {
         join(id);
       }}
-      className="sliding-button right"
+      className="double-border-button"
     >
       Join
     </button>

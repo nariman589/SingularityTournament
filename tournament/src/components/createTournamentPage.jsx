@@ -13,13 +13,20 @@ import {
 import { SelectControl } from "formik-chakra-ui";
 import doWeHaveToken from "./checkIfAutorized";
 import Header from "./header";
+import AlertMessage from "./alert";
 
 export default function CreateTournamentPage() {
   if (doWeHaveToken()) {
     return (
       <ChakraProvider>
         <Header />
-        <Flex bg="gray.100" align="center" justify="center" h="80vh">
+
+        <Flex
+          bg="rgba(39, 42, 51, 0.95);"
+          align="center"
+          justify="center"
+          h="80vh"
+        >
           <Box bg="white" p={10} rounded="md" w={"80%"}>
             <Formik
               initialValues={{
@@ -44,13 +51,12 @@ export default function CreateTournamentPage() {
                       },
                     }
                   );
-                  const res = await req.json();
 
                   if (req.ok) {
-                    alert("Tournament added");
+                    AlertMessage("Tournament added", "success");
                     window.location.pathname = "/";
                   } else {
-                    alert(res.message);
+                    AlertMessage("Something went wrong!", "error");
                   }
                 } catch (error) {
                   console.log(error);
@@ -107,13 +113,10 @@ export default function CreateTournamentPage() {
                       name="type"
                       selectProps={{ placeholder: "Select Game" }}
                     >
-                      <option value="MortalCombat">MortalCombat</option>
+                      <option value="MortalKombat">Mortal Kombat</option>
                       <option value="Fifa">Fifa</option>
                       <option value="UFC">UFC</option>
-                      <option value="Tenis">Tenis</option>
-                      <option value="test">TEST</option>
-                      <option value="tesst">TEsST</option>
-                      <option value="aida">aida</option>
+                      <option value="Tennis">Tennis</option>
                     </SelectControl>
 
                     <Button type="submit" colorScheme="orange" width="full">

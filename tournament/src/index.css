@@ -1,11 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Anek+Malayalam:wght@300;400&display=swap");
 
 body {
   margin: 0;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Anek Malayalam", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 500;
+  background-color: rgba(39, 42, 51, 0.95);
 }
 
 a {
@@ -16,16 +18,18 @@ a {
 .autorizationNavElemes {
   width: 100%;
   height: 60px;
-
+  background-color: rgba(39, 42, 51, 0.95);
   display: flex;
   justify-content: center;
   align-items: center;
   /* background-color: rgba(0, 0, 0, 0.3); */
-  margin-bottom: 40px;
+  padding-bottom: 10px;
+  padding-top: 10px;
 }
 
 .Logo {
   margin-left: 30px;
+  /* box-shadow: 1px 1px 1px white; */
 }
 
 .headerUserNav {
@@ -76,6 +80,12 @@ a {
   margin: 0 auto;
 }
 
+.participantsElemetsDiv {
+  display: flex;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
 @media (max-width: 700px) {
   .BodyImage > img {
     width: 80%;
@@ -88,11 +98,13 @@ a {
 .mainPageTitle {
   display: flex;
   width: 100%;
-  height: 150px;
-  background-color: black;
+  height: 100px;
+  background-color: #fe6637;
   color: white;
   text-align: center;
   align-items: center;
+  margin-top: 20px;
+  margin-bottom: 50px;
 }
 
 .mainPageTitle > h2 {
@@ -100,18 +112,22 @@ a {
   font-weight: 300;
 }
 .tournamentList {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-gap: 24px 16px;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin-bottom: 50px;
 }
 
 .tournamentInfo {
-  width: 80%;
-  max-width: 800px;
+  width: 60%;
+  /* max-width: 800px; */
   box-shadow: 5px 5px 10px 2px rgba(0, 0, 0, 0.4);
+  color: white;
+
   /* border-radius: 3px; */
   margin: 40px auto;
   padding: 20px;
-  background-color: white;
+  background-color: #23252d;
 }
 .tournamentName {
   text-align: center;
@@ -133,9 +149,12 @@ a {
 
 .tournamentPlayers {
   /* text-align: center; */
-  align-items: center;
+  /* align-items: center;
   /* justify-content: center; */
   display: flex;
+}
+.tournamentPlayers > img {
+  background: transparent;
 }
 
 /* .tournamentPlayers::before {
@@ -143,6 +162,33 @@ a {
   width: 10px;
 } */
 
+.viewTournaments {
+  /* width: 80%; */
+  background-color: #fe6637;
+
+  text-align: center;
+  margin: 10px auto;
+}
+.viewTournaments > a {
+  text-transform: uppercase;
+  padding: 10px;
+  border-radius: 3px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  display: block;
+  color: white;
+  width: 100%;
+}
+
+.tournamentImg {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.tournamentImg > img {
+  margin: 0 auto;
+  align-items: center;
+}
 .createTournament {
   margin-bottom: 15px;
   display: flex;
@@ -153,11 +199,11 @@ a {
   padding: 20px 30px;
   margin: 20px auto 10px auto;
   position: relative;
-  color: black;
-  border: 1px solid rgba(0, 0, 0, 0.4);
+  color: white;
+  border: 1px solid #fff;
   background: none;
   font-weight: 300;
-  font-family: "Montserrat", sans-serif;
+  /* font-family: "Montserrat", sans-serif; */
   text-transform: uppercase;
   letter-spacing: 2px;
 }
@@ -173,15 +219,15 @@ a {
 .border-button:before {
   bottom: 0;
   left: 0;
-  border-left: 1px solid black;
-  border-top: 1px solid black;
+  border-left: 1px solid white;
+  border-top: 1px solid white;
   transition: 0s ease opacity 0.8s, 0.2s ease width 0.4s, 0.2s ease height 0.6s;
 }
 .border-button:after {
   top: 0;
   right: 0;
-  border-right: 1px solid black;
-  border-bottom: 1px solid black;
+  border-right: 1px solid white;
+  border-bottom: 1px solid white;
   transition: 0s ease opacity 0.4s, 0.2s ease width, 0.2s ease height 0.2s;
 }
 .border-button:hover:before,
@@ -234,7 +280,7 @@ a {
   text-align: left;
   margin-left: 40px;
   padding: 20px;
-
+  background-color: #23252d;
   margin-right: 40px;
   border: 1px solid rgba(0, 0, 0, 0.4);
   margin-top: 50px;
@@ -242,7 +288,7 @@ a {
 }
 
 .ProfileInfoField {
-  text-align: center;
+  color: white;
   font-size: 24px;
   display: block;
 }
@@ -254,8 +300,8 @@ a {
   padding: 10px 30px;
   position: relative;
   border: 2px solid #fe6637;
-  color: #fe6637;
-  font-family: "Montserrat", sans-serif;
+  background-color: #fe6637;
+  color: white;
 
   transition: 0.4s;
 }
@@ -285,8 +331,8 @@ a {
   padding: 10px 30px;
   position: relative;
   border: 2px solid #0033cc;
-  color: #0033cc;
-  font-family: "Montserrat", sans-serif;
+  background-color: #0033cc;
+  color: #fff;
 
   transition: 0.4s;
 }
@@ -328,6 +374,7 @@ a {
   background-color: black;
 }
 .tournayName {
+  text-transform: uppercase;
   width: 100%;
   display: flex;
   font-size: 34px;
@@ -340,9 +387,11 @@ a {
 .participantsList {
   margin: 0 auto;
   width: 100%;
-  text-align: center;
+  margin-left: 20px;
+  /* text-align: center; */
 }
 .participantsListTtile {
+  text-transform: uppercase;
   margin-top: 15px;
   font-size: 24px;
   width: 100%;
@@ -356,21 +405,21 @@ a {
 
 .sliding-button {
   text-decoration: none;
-  color: black;
+  color: white;
   display: inline-block;
   position: relative;
   padding: 15px 30px;
   border: 1px solid;
-  border-image: linear-gradient(180deg, #fe6637, #fe6637, #fe6637, #fe6637);
+  border-image: linear-gradient(180deg, #0033cc, #0033cc, #0033cc, #0033cc);
   border-image-slice: 1;
+  background-color: #0033cc;
   margin: 10px 20px;
-  font-family: "Montserrat", sans-serif;
   text-transform: uppercase;
   overflow: hidden;
   letter-spacing: 2px;
   transition: 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
-.sliding-button:before {
+/* .sliding-button:before {
   content: "";
   position: absolute;
   left: 0;
@@ -381,25 +430,28 @@ a {
   color: black;
   background: linear-gradient(90deg, #fe6637, #fe6637, #fe6637, #fe6637);
   transition: 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
-}
+} */
 .sliding-button:hover {
-  background: rgba(255, 255, 255, 0);
+  background: #fe6637;
+  border-image: linear-gradient(180deg, #fe6637, #fe6637, #fe6637, #fe6637);
+  cursor: pointer;
 }
-.sliding-button:hover:before {
+/* .sliding-button:hover:before {
   bottom: 0%;
   top: auto;
   height: 100%;
-}
+} */
 
 .participantsInfoDescr {
   margin-top: 15px;
+  text-transform: uppercase;
   margin-left: 15px;
 }
 
 .closing-button {
   text-decoration: none;
   display: inline-block;
-  margin: 10px;
+  margin: 10px auto;
   color: black;
   box-shadow: 0 0 0 2px black;
   padding: 20px 0;
@@ -411,7 +463,6 @@ a {
   overflow: hidden;
 }
 .closing-button span {
-  font-family: "Montserrat", sans-serif;
   position: relative;
   z-index: 5;
 }
@@ -483,6 +534,9 @@ a {
 .tournamentDate {
   margin: 0 auto;
 }
+.double-border-button:hover {
+  cursor: pointer;
+}
 
 @media (max-width: 700px) {
   .Logo > img {
@@ -498,6 +552,7 @@ a {
     font-size: 12px;
     margin: 5px;
   }
+
   .headerUserNav {
     margin-right: 10px;
   }
@@ -509,12 +564,14 @@ a {
 
 .participantsElemets {
   box-shadow: 2px 5px 20px black;
+  background-color: #23252d;
   margin: 20px auto;
   padding-bottom: 25px;
   padding: 15px;
   width: 80%;
   display: flex;
   flex-wrap: wrap;
+  color: white;
 }
 
 .participantsInfoDescr {

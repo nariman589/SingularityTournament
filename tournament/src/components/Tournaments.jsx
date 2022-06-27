@@ -47,24 +47,41 @@ export default function Tournaments() {
   }, [showTournament]);
 
   if (isTournament) {
+    let tournamentImg = "default";
     return (
       <div className="tournamentList">
         {tournament.map((elem) => {
+          if (
+            elem.type === "UFC" ||
+            elem.type === "MortalKombat" ||
+            elem.type === "Tennis" ||
+            elem.type === "Fifa"
+          ) {
+            tournamentImg = elem.type;
+          } else {
+            tournamentImg = "default";
+          }
           return (
             <div className="tournamentInfo" key={elem.name}>
-              <a href={`/tournament/${elem.id}`}>
-                <div className="tournamentName">{elem.name}</div>
-                <div className="tournamentGame">{elem.type}</div>
-                <div className="tournamentDescription">{elem.description}</div>
-                <div className="tournamentPlayers">
-                  <img
-                    src="https://png.pngtree.com/png-vector/20191017/ourlarge/pngtree-gamepad-icon-png-image_1821905.jpg"
-                    width={25}
-                    alt="Players"
-                  />{" "}
-                  {elem.participants}
-                </div>
-              </a>
+              <div className="tournamentImg">
+                <img
+                  src={`logos/${tournamentImg}.jpg`}
+                  alt="tournamentImg"
+                  width={200}
+                  height={100}
+                />
+              </div>
+              <div className="tournamentName">{elem.name}</div>
+              <div className="tournamentGame">{elem.type}</div>
+
+              <div className="tournamentDescription">{elem.description}</div>
+              <div className="tournamentPlayers">
+                <img src={`logos/gamePad.png`} width={25} alt="Players" />{" "}
+                {elem.participants}
+              </div>
+              <div className="viewTournaments">
+                <a href={`/tournament/${elem.id}`}>View</a>
+              </div>
             </div>
           );
         })}

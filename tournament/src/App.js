@@ -10,13 +10,13 @@ function App() {
     return (
       <div className="App">
         <Header />
-        <div className="BodyImage">
+        {/* <div className="BodyImage">
           <div className="hover"></div>
           <img
             src="https://ustroim-prazdnik.info/_ph/34/2/72139923.jpg?1567752161"
             alt="command picture"
           />
-        </div>
+        </div> */}
 
         <div className="mainPageTitle">
           <h2>Tournaments</h2>
@@ -33,18 +33,22 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <div className="BodyImage">
+      {/* <div className="BodyImage">
         <div className="hover"></div>
         <img
           src="https://ustroim-prazdnik.info/_ph/34/2/72139923.jpg?1567752161"
           alt="command picture"
         />
-      </div>
+      </div> */}
 
       <div className="mainPageTitle">
         <h2>Tournaments</h2>
       </div>
       <Tournaments />
+      <div className="mainPageTitle">
+        <h2>Active Tournaments</h2>
+      </div>
+      <ActiveTournaments />
     </div>
   );
 }
