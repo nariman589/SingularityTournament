@@ -145,6 +145,7 @@ a {
 }
 
 .tournamentDescription {
+  height: 50px;
   font-size: 16px;
   margin-bottom: 20px;
 }
@@ -526,6 +527,7 @@ a {
 }
 
 .LeaderBoard {
+  margin-top: 25px;
   border-top: 1px solid rgba(0, 0, 0, 0.4);
   width: 100%;
   border-bottom: 1px solid rgba(0, 0, 0, 0.4);
@@ -582,4 +584,8 @@ a {
 
 .participantsInfoDescr {
   width: 100%;
+}
+
+.activeTournamentPage {
+  background-color: rgba(39, 42, 51, 0.95);
 }

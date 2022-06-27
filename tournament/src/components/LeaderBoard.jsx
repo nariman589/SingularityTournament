@@ -31,10 +31,39 @@ export default function LeaderBoard(id) {
   }, [makeReq]);
 
   if (!isEmpty(leaderboard)) {
+    const leaders = leaderboard.slice(0, 3);
+    const others = leaderboard.slice(3);
+    console.log(leaders);
     return (
       <div className="LeaderBoard">
         <div className="leaderBoardTitle">Leaderboard</div>
-        {leaderboard.map((elem) => {
+        <div className="leaders">
+          <div className="fisrtPlace">
+            <div className="leadersImg">
+              <img src="logos/first.png" alt="1place" />
+            </div>
+            <div className="leaderName">
+              {leaders[0].name} Score({leaders[0].score})
+            </div>
+          </div>
+          <div className="secondPlace">
+            <div className="leadersImg">
+              <img src="logos/2place.png" alt="2place" />
+            </div>
+            <div className="leaderName">
+              {leaders[1].name} Score({leaders[1].score})
+            </div>
+          </div>
+          <div className="thirdPlace">
+            <div className="leadersImg">
+              <img src="logos/3place.png" alt="3place" />
+            </div>
+            <div className="leaderName">
+              {leaders[2].name} Score({leaders[2].score})
+            </div>
+          </div>
+        </div>
+        {others.map((elem) => {
           return (
             <div className="leaderboardElem" key={elem.name}>
               <div className="leaderboardElemName">

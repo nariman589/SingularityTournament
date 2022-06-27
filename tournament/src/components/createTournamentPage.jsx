@@ -27,7 +27,7 @@ export default function CreateTournamentPage() {
           justify="center"
           h="80vh"
         >
-          <Box bg="white" p={10} rounded="md" w={"80%"}>
+          <Box bg="#23252d" p={10} rounded="md" w={"80%"}>
             <Formik
               initialValues={{
                 name: "",
@@ -67,7 +67,9 @@ export default function CreateTournamentPage() {
                 <form onSubmit={handleSubmit}>
                   <VStack spacing={4} align="flex-start">
                     <FormControl isInvalid={!!errors.name && touched.name}>
-                      <FormLabel htmlFor="name">Name</FormLabel>
+                      <FormLabel color="white" htmlFor="name">
+                        Name
+                      </FormLabel>
                       <Field
                         as={Input}
                         id="name"
@@ -89,7 +91,9 @@ export default function CreateTournamentPage() {
                     <FormControl
                       isInvalid={!!errors.description && touched.description}
                     >
-                      <FormLabel htmlFor="description">Description</FormLabel>
+                      <FormLabel color="white" htmlFor="description">
+                        Description
+                      </FormLabel>
                       <Field
                         as={Textarea}
                         id="description"
@@ -110,6 +114,7 @@ export default function CreateTournamentPage() {
                     </FormControl>
 
                     <SelectControl
+                      bg="white"
                       name="type"
                       selectProps={{ placeholder: "Select Game" }}
                     >

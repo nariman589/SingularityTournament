@@ -27,7 +27,11 @@ async function join(id) {
         },
       }
     );
-    AlertMessage("You are added!", "success");
+    if (req.ok) {
+      AlertMessage("You are added!", "success");
+    } else {
+      AlertMessage("You already in!", "error");
+    }
   } catch {
     console.log("error");
   }
