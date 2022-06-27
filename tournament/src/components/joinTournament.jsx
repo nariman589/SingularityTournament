@@ -1,3 +1,5 @@
+import AlertMessage from "./alert";
+
 export default function JoinTourney(id) {
   return (
     <button
@@ -25,9 +27,7 @@ async function join(id) {
         },
       }
     );
-    const res = await req.json();
-    alert(res.message);
-    window.location.reload();
+    AlertMessage("You are added!", "success");
   } catch {
     console.log("error");
   }

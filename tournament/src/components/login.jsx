@@ -83,10 +83,11 @@ export default function Login() {
                     </FormLabel>
                     <Field
                       as={Input}
+                      bg="white"
                       id="login"
                       name="login"
                       type="login"
-                      variant="filled"
+                      // variant="filled"
                     />
                   </FormControl>
                   <FormControl
@@ -97,10 +98,11 @@ export default function Login() {
                     </FormLabel>
                     <Field
                       as={Input}
+                      bg="white"
                       id="password"
                       name="password"
                       type="password"
-                      variant="filled"
+                      // variant="filled"
                       validate={(value) => {
                         let error;
 

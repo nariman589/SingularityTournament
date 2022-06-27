@@ -70,7 +70,8 @@ export default function Registration() {
                       id="login"
                       name="login"
                       type="login"
-                      variant="filled"
+                      bg="white"
+                      // variant="filled"
                     />
                   </FormControl>
                   <FormControl isInvalid={!!errors.name && touched.name}>
@@ -82,7 +83,8 @@ export default function Registration() {
                       id="name"
                       name="name"
                       type="text"
-                      variant="filled"
+                      bg="white"
+                      // variant="filled"
                       validate={(value) => {
                         let error;
 
@@ -104,7 +106,8 @@ export default function Registration() {
                       id="surname"
                       name="surname"
                       type="text"
-                      variant="filled"
+                      bg="white"
+                      // variant="filled"
                       validate={(value) => {
                         let error;
 
@@ -141,7 +144,8 @@ export default function Registration() {
                       id="password"
                       name="password"
                       type="password"
-                      variant="filled"
+                      bg="white"
+                      // variant="filled"
                       validate={(value) => {
                         let error;
 
