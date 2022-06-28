@@ -507,19 +507,23 @@ a {
   border: 1px solid rgba(0, 0, 0, 0.4);
   margin: 15px;
   justify-content: center;
+  text-align: center;
   width: 200px;
   font-size: 18px;
 }
 .firstPlayer {
+  position: relative;
   height: 60px;
   align-items: center;
   justify-content: center;
   border-bottom: 1px solid black;
 }
 .secondPlayer {
+  position: relative;
   height: 60px;
 }
 .playsWithBtn {
+  position: relative;
   display: flex;
 }
 .winner {
@@ -544,6 +548,29 @@ a {
 }
 .double-border-button:hover {
   cursor: pointer;
+}
+
+.leaders {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 20%;
+  padding-right: 20%;
+}
+.leadersImg > img {
+  margin: 0 auto;
+  height: 150px;
+}
+.leaderName {
+  margin-top: 15px;
+}
+.leaderScore {
+  text-align: center;
+}
+
+.checker {
+  position: absolute;
+
+  right: 0;
 }
 
 @media (max-width: 700px) {

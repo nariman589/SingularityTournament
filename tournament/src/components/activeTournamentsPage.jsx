@@ -99,20 +99,20 @@ export default function ActiveTournamentPage() {
                                   <div key={element.login} className="plays">
                                     <div className="firstPlayer winner">
                                       {element.username1}
+                                      <WinLose
+                                        user={element.username1}
+                                        userOpponent={element.username2}
+                                        login={login}
+                                        stage={elem.stage}
+                                        tournamentId={id}
+                                        winner={element.username1}
+                                        haveWinner={true}
+                                      />
                                     </div>
                                     <div className="secondPlayer">
                                       {element.username2}
                                     </div>
                                   </div>
-                                  <WinLose
-                                    user={element.username1}
-                                    userOpponent={element.username2}
-                                    login={login}
-                                    stage={elem.stage}
-                                    tournamentId={id}
-                                    winner={element.username1}
-                                    haveWinner={true}
-                                  />
                                 </div>
                               );
                             }
@@ -125,17 +125,17 @@ export default function ActiveTournamentPage() {
                                     </div>
                                     <div className="secondPlayer winner">
                                       {element.username2}
+                                      <WinLose
+                                        user={element.username2}
+                                        userOpponent={element.username1}
+                                        login={login}
+                                        stage={elem.stage}
+                                        tournamentId={id}
+                                        winner={element.username2}
+                                        haveWinner={true}
+                                      />
                                     </div>
                                   </div>
-                                  <WinLose
-                                    user={element.username2}
-                                    userOpponent={element.username1}
-                                    login={login}
-                                    stage={elem.stage}
-                                    tournamentId={id}
-                                    winner={element.username2}
-                                    haveWinner={true}
-                                  />
                                 </div>
                               );
                             }
@@ -148,20 +148,20 @@ export default function ActiveTournamentPage() {
                                 <div key={element.login} className="plays">
                                   <div className="firstPlayer ">
                                     {element.username1}
+                                    <WinLose
+                                      user={element.username1}
+                                      userOpponent={element.username2}
+                                      login={login}
+                                      stage={elem.stage}
+                                      tournamentId={id}
+                                      winner={element.username2}
+                                      haveWinner={true}
+                                    />
                                   </div>
                                   <div className="secondPlayer winner">
                                     {element.username2}
                                   </div>
                                 </div>
-                                <WinLose
-                                  user={element.username1}
-                                  userOpponent={element.username2}
-                                  login={login}
-                                  stage={elem.stage}
-                                  tournamentId={id}
-                                  winner={element.username2}
-                                  haveWinner={true}
-                                />
                               </div>
                             );
                           }
@@ -170,19 +170,19 @@ export default function ActiveTournamentPage() {
                               <div key={element.login} className="plays">
                                 <div className="firstPlayer ">
                                   {element.username1}
+                                  <WinLose
+                                    user={element.username1}
+                                    userOpponent={element.username2}
+                                    login={login}
+                                    stage={elem.stage}
+                                    tournamentId={id}
+                                    haveWinner={false}
+                                  />
                                 </div>
                                 <div className="secondPlayer">
                                   {element.username2}
                                 </div>
                               </div>
-                              <WinLose
-                                user={element.username1}
-                                userOpponent={element.username2}
-                                login={login}
-                                stage={elem.stage}
-                                tournamentId={id}
-                                haveWinner={false}
-                              />
                             </div>
                           );
                         }
@@ -196,17 +196,17 @@ export default function ActiveTournamentPage() {
                                   </div>
                                   <div className="secondPlayer ">
                                     {element.username2}
+                                    <WinLose
+                                      user={element.username1}
+                                      userOpponent={element.username2}
+                                      login={login}
+                                      stage={elem.stage}
+                                      tournamentId={id}
+                                      winner={element.username1}
+                                      haveWinner={true}
+                                    />
                                   </div>
                                 </div>
-                                <WinLose
-                                  user={element.username1}
-                                  userOpponent={element.username2}
-                                  login={login}
-                                  stage={elem.stage}
-                                  tournamentId={id}
-                                  winner={element.username1}
-                                  haveWinner={true}
-                                />
                               </div>
                             );
                           }
@@ -218,16 +218,16 @@ export default function ActiveTournamentPage() {
                                 </div>
                                 <div className="secondPlayer">
                                   {element.username2}
+                                  <WinLose
+                                    user={element.username2}
+                                    userOpponent={element.username1}
+                                    login={login}
+                                    stage={elem.stage}
+                                    tournamentId={id}
+                                    haveWinner={false}
+                                  />
                                 </div>
                               </div>
-                              <WinLose
-                                user={element.username2}
-                                userOpponent={element.username1}
-                                login={login}
-                                stage={elem.stage}
-                                tournamentId={id}
-                                haveWinner={false}
-                              />
                             </div>
                           );
                         }
