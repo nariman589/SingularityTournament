@@ -398,6 +398,7 @@ a {
   /* text-align: center; */
 }
 .participantsListTtile {
+  text-align: center;
   text-transform: uppercase;
   margin-top: 15px;
   font-size: 24px;
@@ -512,6 +513,7 @@ a {
   font-size: 18px;
 }
 .firstPlayer {
+  padding-top: 20px;
   position: relative;
   height: 60px;
   align-items: center;
@@ -519,6 +521,7 @@ a {
   border-bottom: 1px solid black;
 }
 .secondPlayer {
+  padding-top: 20px;
   position: relative;
   height: 60px;
 }
@@ -570,7 +573,8 @@ a {
 .checker {
   position: absolute;
 
-  right: 0;
+  top: 20px;
+  right: 10px;
 }
 
 @media (max-width: 700px) {

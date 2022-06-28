@@ -30,10 +30,12 @@ export default function LeaderBoard(id) {
     }
   }, [makeReq]);
 
+  // let leaders;
+  // let others;
+
   if (!isEmpty(leaderboard)) {
     const leaders = leaderboard.slice(0, 3);
     const others = leaderboard.slice(3);
-    console.log(leaders);
     return (
       <div className="LeaderBoard">
         <div className="leaderBoardTitle">Leaderboard</div>
@@ -44,9 +46,12 @@ export default function LeaderBoard(id) {
             </div>
             <div className="leaderDescr">
               <div className="leaderName">
-                {leaders[1].name} {leaders[1].surname}
+                {leaders[1].name ? leaders[1].name : "none"}{" "}
+                {leaders[1].surname ? leaders[1].surname : "none"}
               </div>
-              <div className="leaderScore">Score: {leaders[1].score}</div>
+              <div className="leaderScore">
+                Score: {leaders[1].score ? leaders[1].score : "none"}
+              </div>
             </div>
           </div>
           <div className="fisrtPlace">
@@ -55,9 +60,12 @@ export default function LeaderBoard(id) {
             </div>
             <div className="leaderDescr">
               <div className="leaderName">
-                {leaders[0].name} {leaders[0].surname}
+                {leaders[0].name ? leaders[0].name : "none"}
+                {leaders[0].surname ? leaders[0].surname : "none"}
               </div>
-              <div className="leaderScore">Score: {leaders[0].score}</div>
+              <div className="leaderScore">
+                Score: {leaders[0].score ? leaders[0].score : "none"}
+              </div>
             </div>
           </div>
           <div className="thirdPlace">
@@ -66,21 +74,26 @@ export default function LeaderBoard(id) {
             </div>
             <div className="leaderDescr">
               <div className="leaderName">
-                {leaders[2].name} {leaders[2].surname}
+                {leaders[2].name ? leaders[2].name : "none"}{" "}
+                {leaders[2].surname ? leaders[2].surname : "none"}
               </div>
-              <div className="leaderScore">Score: {leaders[2].score}</div>
+              <div className="leaderScore">
+                Score: {leaders[2].score ? leaders[2].score : "none"}
+              </div>
             </div>
           </div>
         </div>
         {others.map((elem, index) => {
-          return (
-            <div className="leaderboardElem" key={elem.name}>
-              <div className="leaderboardElemName">
-                {index + 4}) Name: {elem.name} {elem.surname}
+          if (elem) {
+            return (
+              <div className="leaderboardElem" key={elem.name}>
+                <div className="leaderboardElemName">
+                  {index + 4}) Name: {elem.name} {elem.surname}
+                </div>
+                <div className="score"> Score: {elem.score}</div>
               </div>
-              <div className="score"> Score: {elem.score}</div>
-            </div>
-          );
+            );
+          }
         })}
       </div>
     );
