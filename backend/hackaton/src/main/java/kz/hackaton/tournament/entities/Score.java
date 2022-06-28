@@ -14,5 +14,9 @@ public class Score {
     private enum Scores {
         S1, S0;
     }
+
+    public void testFeature() {
+        System.out.println("test");
+    }
 }
 
