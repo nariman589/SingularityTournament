@@ -412,6 +412,7 @@ a {
 .participant {
   margin-bottom: 10px;
   font-size: 16px;
+  text-align: center;
   width: 100%;
 }
 
@@ -425,7 +426,7 @@ a {
   border-image: linear-gradient(180deg, #0033cc, #0033cc, #0033cc, #0033cc);
   border-image-slice: 1;
   background-color: #0033cc;
-  margin: 10px 20px;
+  margin: 10px auto;
   text-transform: uppercase;
   overflow: hidden;
   letter-spacing: 2px;
@@ -458,6 +459,7 @@ a {
   margin-top: 15px;
   text-transform: uppercase;
   margin-left: 15px;
+  text-align: center;
 }
 
 .closing-button {
@@ -643,6 +645,7 @@ a {
 }
 
 .participantsElemets {
+  font-family: "Anek Malayalam", sans-serif;
   box-shadow: 2px 5px 20px black;
   background-color: #23252d;
   margin: 20px auto;
