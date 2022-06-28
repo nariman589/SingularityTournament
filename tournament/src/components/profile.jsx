@@ -4,6 +4,7 @@ import isEmpty from "./checkEmpty";
 import doWeHaveToken from "./checkIfAutorized";
 import Header from "./header";
 import ReactLoading from "react-loading";
+import Footer from "./footer";
 
 // function profInfoImitation() {
 //   return
@@ -45,6 +46,7 @@ export default function Profile() {
             <div className="ProfileInfoField">Login: {user.login}</div>
           </div>
         </div>
+        <Footer />
       </div>
     );
   }
@@ -52,6 +54,7 @@ export default function Profile() {
     <div className="profilePage">
       <Header />
       <ReactLoading color={"orange"} className="center" />
+      <Footer />
     </div>
   );
 }

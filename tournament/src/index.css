@@ -292,6 +292,7 @@ a {
   border: 1px solid rgba(0, 0, 0, 0.4);
   margin-top: 50px;
   font-size: 16px;
+  margin-bottom: 50px;
 }
 
 .ProfileInfoField {
@@ -580,7 +581,7 @@ a {
 
 .leaders {
   display: flex;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
   justify-content: space-evenly;
 }
 .leadersImg > img {
@@ -588,6 +589,7 @@ a {
   height: 150px;
 }
 .leaderName {
+  text-align: center;
   margin-top: 15px;
 }
 .leaderScore {
@@ -690,6 +692,7 @@ a {
   width: 250px;
 }
 .developerPic > img {
+  border: 3px solid #fe6637;
   height: 350px;
   width: 250px;
 }
@@ -699,4 +702,8 @@ a {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
+}
+
+.developer {
+  margin-bottom: 15px;
 }

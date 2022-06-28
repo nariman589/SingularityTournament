@@ -28,6 +28,7 @@ function App() {
           <h2>Active Tournaments</h2>
         </div>
         <ActiveTournaments />
+        <Footer />
       </div>
     );
   }
