@@ -664,3 +664,39 @@ a {
 .activeTournamentPage {
   background-color: rgba(39, 42, 51, 0.95);
 }
+
+.Footer {
+  height: 150px;
+  background-color: rgba(39, 42, 51, 0.95);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Footer > a {
+  color: #fe6637;
+}
+
+.developersInfo {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+.teamLogo {
+  width: 250px;
+  margin: 0 auto;
+  margin-bottom: 50px;
+}
+.teamLogo > img {
+  width: 250px;
+}
+.developerPic > img {
+  height: 350px;
+  width: 250px;
+}
+.developers {
+  text-align: center;
+  color: #fff;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}

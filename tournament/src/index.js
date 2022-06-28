@@ -12,6 +12,7 @@ import Profile from "./components/profile";
 import TournamentPage from "./components/tournamentPage";
 import ServerError from "./components/500";
 import ActiveTournamentPage from "./components/activeTournamentsPage";
+import Developers from "./components/developers";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -27,6 +28,7 @@ root.render(
         <Route path="/tournament/:id" element={<TournamentPage />} />
         <Route path="/active/:id" element={<ActiveTournamentPage />} />
         <Route path="/500" element={<ServerError />} />
+        <Route path="/developers" element={<Developers />} />
       </Routes>
     </Router>
   </React.StrictMode>

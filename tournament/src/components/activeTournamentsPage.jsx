@@ -6,6 +6,7 @@ import Header from "./header";
 import ReactLoading from "react-loading";
 import WinLose from "./winLose";
 import LeaderBoard from "./LeaderBoard";
+import Footer from "./footer";
 async function tournamentDetails(id) {
   const token = sessionStorage.getItem("token");
   try {
@@ -309,6 +310,7 @@ export default function ActiveTournamentPage() {
             </div>
           </div>
         </div>
+        <Footer />
       </div>
     );
   }
@@ -316,6 +318,7 @@ export default function ActiveTournamentPage() {
     <div className="activeTournamentPage">
       <Header />
       <ReactLoading color={"orange"} className="center" />
+      <Footer />
     </div>
   );
 }

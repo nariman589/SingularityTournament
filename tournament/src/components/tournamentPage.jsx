@@ -8,6 +8,7 @@ import ReactLoading from "react-loading";
 import JoinTourney from "./joinTournament";
 import StartButton from "./startButton";
 import AlertMessage from "./alert";
+import Footer from "./footer";
 
 async function tournamentDetails(id) {
   const token = sessionStorage.getItem("token");
@@ -92,6 +93,7 @@ export default function TournamentPage() {
             <StartButton id={id} />
           </div>
         </div>
+        <Footer />
       </div>
     );
   }
@@ -99,6 +101,7 @@ export default function TournamentPage() {
     <div className="tournamentPage">
       <Header />
       <ReactLoading color={"orange"} className="center" />
+      <Footer />
     </div>
   );
 }

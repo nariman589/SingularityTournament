@@ -14,6 +14,7 @@ import { SelectControl } from "formik-chakra-ui";
 import doWeHaveToken from "./checkIfAutorized";
 import Header from "./header";
 import AlertMessage from "./alert";
+import Footer from "./footer";
 
 export default function CreateTournamentPage() {
   if (doWeHaveToken()) {
@@ -133,6 +134,7 @@ export default function CreateTournamentPage() {
             </Formik>
           </Box>
         </Flex>
+        <Footer />
       </ChakraProvider>
     );
   }
@@ -140,6 +142,7 @@ export default function CreateTournamentPage() {
     <ChakraProvider>
       <Header />
       <div className="NotAutorized">You Not Authorized</div>
+      <Footer />
     </ChakraProvider>
   );
 }

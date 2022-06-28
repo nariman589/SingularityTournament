@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import ActiveTournaments from "./components/activeTournaments";
 import doWeHaveToken from "./components/checkIfAutorized";
 import CreateTournament from "./components/CreateTournament";
+import Footer from "./components/footer";
 import Header from "./components/header";
 import Tournaments from "./components/Tournaments";
 
@@ -49,6 +50,7 @@ function App() {
         <h2>Active Tournaments</h2>
       </div>
       <ActiveTournaments />
+      <Footer />
     </div>
   );
 }
