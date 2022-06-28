@@ -47,8 +47,7 @@ export default function LeaderBoard(id) {
               </div>
               <div className="leaderDescr">
                 <div className="leaderName">
-                  {leaders[1].name}
-                  {leaders[1].surname}
+                  {leaders[1].name} {leaders[1].surname}
                 </div>
                 <div className="leaderScore">Score: {leaders[1].score}</div>
               </div>
@@ -59,8 +58,7 @@ export default function LeaderBoard(id) {
               </div>
               <div className="leaderDescr">
                 <div className="leaderName">
-                  {leaders[0].name}
-                  {leaders[0].surname}
+                  {leaders[0].name} {leaders[0].surname}
                 </div>
                 <div className="leaderScore">Score: {leaders[0].score}</div>
               </div>
@@ -71,8 +69,7 @@ export default function LeaderBoard(id) {
               </div>
               <div className="leaderDescr">
                 <div className="leaderName">
-                  {leaders[2].name}
-                  {leaders[2].surname}
+                  {leaders[2].name} {leaders[2].surname}
                 </div>
                 <div className="leaderScore">Score: {leaders[2].score}</div>
               </div>
