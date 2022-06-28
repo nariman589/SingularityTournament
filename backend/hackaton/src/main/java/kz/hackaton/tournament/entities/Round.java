@@ -22,6 +22,12 @@ public class Round {
     @JoinColumn(name = "round_id")
     private List<Match> matchList;
 
+    public void test() {
+        System.out.println("Rakhim");
+    }
+
+
+
 
 
 }
