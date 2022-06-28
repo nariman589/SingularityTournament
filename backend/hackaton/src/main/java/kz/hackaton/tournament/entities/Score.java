@@ -16,7 +16,7 @@ public class Score {
     }
 
     public void testFeature() {
-        System.out.println("test");
+        System.out.println("AHAHAHA");
     }
 }
 
