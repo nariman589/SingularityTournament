@@ -380,6 +380,10 @@ a {
   color: white;
   background-color: black;
 }
+.roundDate {
+  text-align: center;
+}
+
 .tournayName {
   text-transform: uppercase;
   width: 100%;

@@ -1,9 +1,3 @@
-import {
-  Button,
-  ChakraProvider,
-  Checkbox,
-  useCallbackRef,
-} from "@chakra-ui/react";
 import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import isEmpty from "./checkEmpty";
@@ -27,7 +21,7 @@ async function tournamentDetails(id) {
       }
     );
     const res = await req.json();
-    console.log("brac", res);
+
     return res;
   } catch {
     console.log("error");
@@ -37,7 +31,6 @@ async function tournamentDetails(id) {
 export default function ActiveTournamentPage() {
   const { id } = useParams();
   const [tournamentTable, setTable] = useState([]);
-
   const getTournament = useCallback(async () => {
     try {
       const data = await tournamentDetails(id);
@@ -56,7 +49,8 @@ export default function ActiveTournamentPage() {
   }, []);
 
   if (doWeHaveToken() && !isEmpty(tournamentTable)) {
-    console.log(tournamentTable);
+    const startedDate = new Date(tournamentTable.startedDate);
+    let test = new Date(startedDate.setDate(startedDate.getDate() - 1));
     const user = sessionStorage.getItem("user");
     const login = sessionStorage.getItem("login");
     return (
@@ -82,12 +76,55 @@ export default function ActiveTournamentPage() {
             </div>
             <LeaderBoard id={id} />
             <div className="participantsList">
-              {tournamentTable.roundList.map((elem) => {
+              {tournamentTable.roundList.map((elem, index) => {
+                let day = test.getDay();
+                if (day === 5) {
+                  test = new Date(test.setDate(test.getDate() + 3));
+                } else {
+                  test = new Date(test.setDate(test.getDate() + 1));
+                }
+                const dateResult = test.toLocaleDateString(
+                  "en-US",
+                  {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  }
+                  // const weekDays = [
+                  //   "Sunday",
+                  //   "Monday",
+                  //   "Tuesday",
+                  //   "Wednesday",
+                  //   "Thursday",
+                  //   "Friday",
+                  //   "Saturday",
+                  // ];
+                  // let day = startedDay + index;
+                  // let dateDay = date + index;
+                  // if (day === 0) {
+                  //   day = 2;
+                  //   dateDay += 2;
+                  // }
+                  // if (day === 6) {
+                  //   day = 1;
+                  //   dateDay += 1;
+                  // }
+                  // if (day > 6) {
+                  //   day = day - 5;
+                  //   dateDay += 1;
+                  // }
+                );
                 return (
                   <div className="item">
-                    <div className="participantsListTtile">
-                      Tournament Round {elem.stage}
+                    <div className="dateTitle">
+                      <div className="participantsListTtile">
+                        Tournament Round {elem.stage}
+                      </div>
+                      <div key={index} className="roundDate">
+                        {dateResult}
+                      </div>
                     </div>
+
                     <div className="playsBox">
                       {elem.matches.map((element) => {
                         if (element.winner) {
