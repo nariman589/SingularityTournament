@@ -171,7 +171,9 @@ export default function WinLose(user) {
   }
   return (
     <ChakraProvider>
-      <Button onClick={onOpen}>Check</Button>
+      <button className="checker" onClick={onOpen}>
+        ✔
+      </button>
 
       <Modal blockScrollOnMount={false} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />

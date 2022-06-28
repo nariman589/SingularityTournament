@@ -29,7 +29,7 @@ async function start(id) {
       }
     );
     const res = await req.json();
-    AlertMessage(res.message, "succes");
+    AlertMessage(res.message, "success");
   } catch (error) {
     console.log(error);
   }

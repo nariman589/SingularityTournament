@@ -511,6 +511,16 @@ a {
   text-align: center;
   width: 200px;
   font-size: 18px;
+  position: relative;
+}
+.plays::before {
+  content: "VS";
+  color: #fe6637;
+  position: absolute;
+  top: 40%;
+  left: 46%;
+  /* font-size: 18px; */
+  z-index: 100;
 }
 .firstPlayer {
   padding-top: 20px;
@@ -533,6 +543,14 @@ a {
   background-color: green;
 }
 
+.leadersImg {
+  display: flex;
+  /* align-content: center; */
+  /* flex-wrap: nowrap; */
+  /* flex-direction: row-reverse; */
+  /* justify-content: space-evenly; */
+  align-items: center;
+}
 .LeaderBoard {
   margin-top: 25px;
   border-top: 1px solid rgba(0, 0, 0, 0.4);
@@ -542,6 +560,7 @@ a {
 .leaderBoardTitle {
   text-align: center;
   font-size: 24px;
+  margin-bottom: 15px;
 }
 /* .leaderboardElem {
   display: flex;
@@ -555,9 +574,8 @@ a {
 
 .leaders {
   display: flex;
-  justify-content: space-between;
-  padding-left: 20%;
-  padding-right: 20%;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
 }
 .leadersImg > img {
   margin: 0 auto;
@@ -577,7 +595,7 @@ a {
   right: 10px;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 767px) {
   .Logo > img {
     width: 150px;
   }
@@ -593,7 +611,26 @@ a {
   }
 
   .headerUserNav {
-    margin-right: 10px;
+    /* margin-right: 10px; */
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  .tournamentList {
+    justify-items: center;
+    grid-template-columns: 1fr;
+  }
+  .tournayName {
+    font-size: 24px;
+    text-align: center;
+  }
+  .tournamentDate {
+    font-size: 14px;
+  }
+  .participantsListTtile {
+    font-size: 16px;
+  }
+  .participantsInfoDescr {
+    font-size: 14px;
   }
 }
 

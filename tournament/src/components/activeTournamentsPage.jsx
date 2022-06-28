@@ -56,6 +56,7 @@ export default function ActiveTournamentPage() {
   }, []);
 
   if (doWeHaveToken() && !isEmpty(tournamentTable)) {
+    console.log(tournamentTable);
     const user = sessionStorage.getItem("user");
     const login = sessionStorage.getItem("login");
     return (
@@ -79,9 +80,7 @@ export default function ActiveTournamentPage() {
               </div>
               {tournamentTable.description}
             </div>
-            <div className="LeaderBoard">
-              <LeaderBoard id={id} />
-            </div>
+            <LeaderBoard id={id} />
             <div className="participantsList">
               {tournamentTable.roundList.map((elem) => {
                 return (
