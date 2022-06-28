@@ -90,5 +90,5 @@ create table user_fact
      id BIGSERIAL not null primary key,
      fact VARCHAR(255) not null ,
      learned_material varchar(255),
-     id_of_feedbacker bigint not null;
-)
+     id_of_feedbacker bigint not null
+);
