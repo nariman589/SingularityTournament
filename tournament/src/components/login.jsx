@@ -10,6 +10,7 @@ import {
   Input,
   VStack,
 } from "@chakra-ui/react";
+import AlertMessage from "./alert";
 
 export default function Login() {
   return (
@@ -64,7 +65,7 @@ export default function Login() {
                   sessionStorage.setItem("login", `${userRes.login}`);
                   window.location.pathname = "/";
                 } else {
-                  alert(reqJ.message);
+                  AlertMessage(reqJ.message, "error");
                 }
                 //
               } catch (error) {

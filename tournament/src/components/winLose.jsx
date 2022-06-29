@@ -49,7 +49,6 @@ async function setWinner(tournamentId, stage, login) {
     }
     if (reqWinner.ok) {
       alert("winner setted");
-      window.location.reload();
     }
   } catch (err) {
     console.log(err);
@@ -80,7 +79,6 @@ async function setFacts(user, fact, done) {
     );
     const res = await req.json();
     alert(res.message);
-    window.location.reload();
   } catch (err) {
     console.log(err);
   }
