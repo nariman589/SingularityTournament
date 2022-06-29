@@ -206,6 +206,11 @@ public class TournamentService {
 
     }
 
+    public void deleteTournament(Long id) {
+        Tournament tournament = tournamentRepositories.findById(id).orElseThrow(() -> new TournamentException("Tournament doesn't exists"));
+        tournamentRepositories.deleteById(id);
+    }
+
     @Transactional
     public void info(InfoDto infoDto, String feedbackerLogin) {
         User user = userService.findUserBySurnameAndName(infoDto.getSurname(), infoDto.getName());

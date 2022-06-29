@@ -32,7 +32,7 @@ public class Tournament {
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private Collection<User> users;
 
-    @OneToMany()
+    @OneToMany(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "tournament_id")
     public List<Round> roundList;
 
