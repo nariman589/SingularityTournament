@@ -7,6 +7,7 @@ import kz.hackaton.tournament.exceptions.UserException;
 import kz.hackaton.tournament.repositories.TournamentRepositories;
 import lombok.RequiredArgsConstructor;
 import org.apache.tomcat.jni.Local;
+import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -49,9 +50,6 @@ public class TournamentService {
             if (x.getType().equals(createTournamentDto.getType()) && !(x.getStatus().equals("completed")))
                 throw new TournamentException("Tournament " + createTournamentDto.getType() + " already exists");
         }
-//        if(tournaments != null) {
-//            throw new TournamentException("Tournament " + createTournamentDto.getType() + " already exists");
-//        }
         Tournament tournament = new Tournament();
         tournament.setName(createTournamentDto.getName());
         tournament.setType(createTournamentDto.getType());
@@ -66,13 +64,15 @@ public class TournamentService {
     @Transactional
     public void startTourney(Long id, String login) {
         User userByLogin = userService.findUserByLogin(login);
-        if (!userByLogin.getLogin().equals(login)) {
-            System.out.println("ERORRRRRR");
-            return;
-        }
 
-        Tournament tournament = tournamentRepositories.findById(id).orElseThrow(() -> new RuntimeException("EROR"));
+        Tournament tournament = tournamentRepositories.findById(id).orElseThrow(() -> new TournamentException("Tournament not found"));
+        if (!userByLogin.getId().equals(tournament.getOwner())) {
+            throw new TournamentException("Турнир может начать только тот кто его создал!");
+        }
         Collection<User> users = tournament.getUsers();
+        if (users.size() < 2) {
+            throw new TournamentException("Как минимум два участника должны быть");
+        }
         int usersCount = users.size() - 1;
         int days = (usersCount / 5) * 2 + usersCount;
         tournament.setStatus("started");
@@ -82,6 +82,7 @@ public class TournamentService {
         List<Round> roundList = generateRound(tournament);
 
         tournament.setRoundList(roundList);
+
 
     }
 
@@ -120,7 +121,7 @@ public class TournamentService {
 
     @Transactional
     public TournamentBracketDto getDetailsTournamentBracket(Long id) {
-        Tournament tournament = tournamentRepositories.findById(id).get();
+        Tournament tournament = tournamentRepositories.findById(id).orElseThrow(() -> new TournamentException("Tournament not found"));
         TournamentBracketDto tournamentBracketDto = new TournamentBracketDto(tournament.getId(), tournament.getName(), tournament.getType(), tournament.getDescription());
         tournamentBracketDto.setStartedDate(tournament.getStartedDate().toString());
         tournamentBracketDto.setFinishedDate(tournament.getFinishedDate().toString());
@@ -221,7 +222,7 @@ public class TournamentService {
         if (feedbacker == null) {
             throw new UserException("User not found");
         }
-        if(user.getId().equals(feedbacker.getId())) {
+        if (user.getId().equals(feedbacker.getId())) {
             throw new TournamentException("You cannot add facts about yourself");
         }
         UserFact userFact = new UserFact();
@@ -239,7 +240,7 @@ public class TournamentService {
         Collections.shuffle(users);
         List<Round> roundList = new ArrayList<>();
         int userCount = users.size();
-        System.out.printf(users.toString());
+
         for (int i = 0; i < userCount - 1; i++) {
             Round round = new Round();
             round.setStage(i + 1);
@@ -248,14 +249,16 @@ public class TournamentService {
                 Match match = new Match();
                 match.setUser1(users.get(j).getId());
                 match.setUser2(users.get(userCount - 1 - j).getId());
-                matchService.save(match);
+                match.setRound(round);
                 matchList.add(match);
+                matchService.save(match);
 
             }
 
-            round.setMatchList(matchList);
-            roundService.save(round);
+             round.setMatchList(matchList);
+            round.setTournament(tournament);
             roundList.add(round);
+            roundService.save(round);
 
             shuffleAlg(users);
         }
@@ -288,4 +291,6 @@ public class TournamentService {
 //            }
 //       }
 //    }
+
+
 }

@@ -23,7 +23,6 @@ public class Tournament {
     private String name;
 
     @Column(name = "type")
-
     private String type;
 
     @ManyToMany
@@ -32,8 +31,7 @@ public class Tournament {
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private Collection<User> users;
 
-    @OneToMany(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "tournament_id")
+    @OneToMany(mappedBy = "tournament", cascade = CascadeType.REMOVE)
     public List<Round> roundList;
 
     @Column(name = "owner_id")

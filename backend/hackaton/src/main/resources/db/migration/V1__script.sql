@@ -1,7 +1,3 @@
-drop table if exists users;
-drop table if exists tournaments;
-drop table if exists users_roles;
-drop table if exists roles;
 
 create table user_fact
 (
@@ -28,30 +24,6 @@ create TABLE users
 
 );
 
-
-
-create table match
-(
-    id BIGSERIAL NOT NULL primary key,
-    tournament_id INTEGER,
-    user_id1 BIGINT,
-    user_id2 BIGINT,
-    winner bigint
-
-);
-
-
-create table round
-(
-    id BIGSERIAL NOT NULL primary key,
-    tournament_id INTEGER,
-    stage int,
-    round_id bigint,
-    foreign key (round_id) references match (id)
-
-
-);
-
 create TABLE tournaments
 (
     id BIGSERIAL NOT NULL PRIMARY KEY,
@@ -63,9 +35,30 @@ create TABLE tournaments
     started_date date,
     finished_date date,
     user_id BIGINT,
+    owner_id bigint
+
+
+);
+
+
+create table round
+(
+    id BIGSERIAL NOT NULL primary key,
     tournament_id bigint,
-    owner_id bigint,
-    foreign key (tournament_id) references round (id)
+    stage int,
+    foreign key (tournament_id) references tournaments (id)
+
+
+);
+
+create table match
+(
+    id BIGSERIAL NOT NULL primary key,
+    user_id1 BIGINT,
+    user_id2 BIGINT,
+    winner bigint,
+    round_id bigint,
+    foreign key (round_id) references round (id)
 
 );
 
