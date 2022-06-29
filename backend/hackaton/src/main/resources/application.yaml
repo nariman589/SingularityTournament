@@ -29,4 +29,4 @@ spring:
     user: wndobaytuzibvw
     password: 17bba88b52d94558cddbc8c061745e8c6e82e9be0e08ad922f5d19535329e52a
     enabled: true
-    locations: classpath:db/migrations
+    locations: classpath:db/migration

@@ -17,5 +17,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler
         return new ResponseEntity<>(new ExceptionMessage(ex.getMessage(), HttpStatus.NOT_ACCEPTABLE.value()), HttpStatus.NOT_ACCEPTABLE);
     }
 
+    @ResponseBody
+    @ExceptionHandler(UserException.class)
+    public ResponseEntity<ExceptionMessage> userException(UserException ex) {
+        return new ResponseEntity<>(new ExceptionMessage(ex.getMessage(), HttpStatus.NOT_FOUND.value()), HttpStatus.NOT_FOUND);
+    }
+
 
 }

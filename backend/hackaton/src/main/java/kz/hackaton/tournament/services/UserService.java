@@ -2,8 +2,11 @@ package kz.hackaton.tournament.services;
 
 
 import kz.hackaton.tournament.dto.JwtRequest;
+import kz.hackaton.tournament.dto.UserFullDto;
 import kz.hackaton.tournament.entities.Role;
 import kz.hackaton.tournament.entities.User;
+import kz.hackaton.tournament.entities.UserFact;
+import kz.hackaton.tournament.exceptions.UserException;
 import kz.hackaton.tournament.repositories.RoleRepository;
 import kz.hackaton.tournament.repositories.UserRepository;
 import kz.hackaton.tournament.responses.BodyResponse;
@@ -20,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -35,7 +39,7 @@ public class UserService implements UserDetailsService {
     }
 
     public User findById(Long id) {
-        return userRepository.findById(id).get();
+        return userRepository.findById(id).orElseThrow(() -> new UserException("User not found"));
     }
 
     public String getUserLogin(Long id) {
@@ -80,9 +84,18 @@ public class UserService implements UserDetailsService {
         savedUser.setSurname(jwtRequest.getSurname());
         savedUser.setMajor(jwtRequest.getMajor());
         Collection<Role> collection = new ArrayList<>();
-        collection.add(roleRepository.findById(2L).get());
+        collection.add(roleRepository.findById(1L).get());
         savedUser.setRoles(collection);
 
         return new BodyResponse("User created", Response.Status.OK, userRepository.save(savedUser));
+    }
+
+    public UserFullDto userInfo(Long id) {
+        User user = userRepository.findById(id).orElseThrow(() -> new UserException("User not found"));
+        List<UserFact> userFacts = user.getUserFacts();
+        UserFullDto userFullDto = new UserFullDto(user.getLogin(), user.getName(), user.getSurname(), user.getMajor());
+        List<String> collect = userFacts.stream().map(UserFact::getFact).toList();
+        userFullDto.setFacts(collect);
+        return userFullDto;
     }
 }

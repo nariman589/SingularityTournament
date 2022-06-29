@@ -3,13 +3,13 @@ drop table if exists tournaments;
 drop table if exists users_roles;
 drop table if exists roles;
 
---  todo need to delete
--- create TABLE user_profile
--- (
---     id BIGSERIAL NOT NULL PRIMARY KEY,
---     facts text[],
---     done text[]
--- );
+create table user_fact
+(
+    id BIGSERIAL not null primary key,
+    fact VARCHAR(255) not null ,
+    learned_material varchar(255),
+    id_of_feedbacker bigint not null
+);
 
 
 create TABLE users
@@ -85,10 +85,3 @@ create table users_roles
 
 );
 
-create table user_fact
-(
-     id BIGSERIAL not null primary key,
-     fact VARCHAR(255) not null ,
-     learned_material varchar(255),
-     id_of_feedbacker bigint not null
-);

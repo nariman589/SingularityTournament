@@ -3,6 +3,7 @@ package kz.hackaton.tournament.services;
 import kz.hackaton.tournament.dto.*;
 import kz.hackaton.tournament.entities.*;
 import kz.hackaton.tournament.exceptions.TournamentException;
+import kz.hackaton.tournament.exceptions.UserException;
 import kz.hackaton.tournament.repositories.TournamentRepositories;
 import lombok.RequiredArgsConstructor;
 import org.apache.tomcat.jni.Local;
@@ -186,7 +187,7 @@ public class TournamentService {
         Collection<User> users = tournament.getUsers();
         List<LeaderBoardDto> leaderBoardDtoList = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
-            if(list.get(i).getWinner() == null) {
+            if (list.get(i).getWinner() == null) {
                 continue;
             }
 
@@ -195,11 +196,10 @@ public class TournamentService {
             LeaderBoardDto leaderBoardDto = new LeaderBoardDto(user.getName(), user.getSurname(), list.get(i).getCount());
             leaderBoardDtoList.add(leaderBoardDto);
         }
-        for(User u : users) {
+        for (User u : users) {
             LeaderBoardDto leaderBoardDto = new LeaderBoardDto(u.getName(), u.getSurname(), 0L);
             leaderBoardDtoList.add(leaderBoardDto);
         }
-
 
 
         return leaderBoardDtoList;
@@ -214,12 +214,15 @@ public class TournamentService {
     @Transactional
     public void info(InfoDto infoDto, String feedbackerLogin) {
         User user = userService.findUserBySurnameAndName(infoDto.getSurname(), infoDto.getName());
-        if(user == null) {
-            throw new TournamentException("User not found");
+        if (user == null) {
+            throw new UserException("User not found");
         }
         User feedbacker = userService.findUserByLogin(feedbackerLogin);
-        if(feedbacker == null ) {
-            throw  new TournamentException("User not found");
+        if (feedbacker == null) {
+            throw new UserException("User not found");
+        }
+        if(user.getId().equals(feedbacker.getId())) {
+            throw new TournamentException("You cannot add facts about yourself");
         }
         UserFact userFact = new UserFact();
         userFact.setFact(infoDto.getFact());
@@ -227,29 +230,7 @@ public class TournamentService {
         userFact.setLearnedMaterial(infoDto.getDone());
         userFactService.save(userFact);
         user.getUserFacts().add(userFact);
-//        UserProfile userProfile = userByDto.getUserProfile();
-//        if(userProfile == null) {
-//            userProfile = new UserProfile();
-//            List<String> facts = userProfile.getFacts();
-//            if(facts == null) {
-//                facts = new ArrayList<>();
-//                facts.add(infoDto.getFact());
-//            }
-//
-//            List<String> done = userProfile.getDone();
-//            if(done == null) {
-//                done = new ArrayList<>();
-//                done.add(infoDto.getDone());
-//            }
-//            userProfile.setFacts(facts);
-//            userProfile.setDone(done);
-//            userProfile.setUser(userByDto);
-//            userByDto.setUserProfile(userProfile);
-//
-//            return;
-//        }
-//        userByDto.getUserProfile().getFacts().add(infoDto.getFact());
-//        userByDto.getUserProfile().getDone().add(infoDto.getDone());
+
     }
 
     @Transactional
