@@ -4,6 +4,8 @@ import kz.hackaton.tournament.dto.UserDto;
 import kz.hackaton.tournament.dto.UserFullDto;
 import kz.hackaton.tournament.entities.User;
 import kz.hackaton.tournament.repositories.UserRepository;
+import kz.hackaton.tournament.services.RoundService;
+import kz.hackaton.tournament.services.TournamentService;
 import kz.hackaton.tournament.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +21,7 @@ import java.security.Principal;
 public class UserController {
 
     private final UserService userService;
+    private final RoundService roundService;
 
     @GetMapping
     public UserDto getUser(Principal principal) {
@@ -31,6 +34,8 @@ public class UserController {
         return userService.userInfo(id);
 
     }
+
+
 
 
 

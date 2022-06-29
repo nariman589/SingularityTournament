@@ -25,5 +25,11 @@ public class Match {
     @Column(name = "winner")
     private Long winner;
 
+    @ManyToOne
+    @JoinColumn(name = "round_id")
+    private Round round;
+
+
+
 
 }

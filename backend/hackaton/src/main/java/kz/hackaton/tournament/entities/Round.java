@@ -18,9 +18,18 @@ public class Round {
     @Column(name = "stage")
     private Integer stage;
 
-    @OneToMany(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "round_id")
+    @OneToMany(mappedBy = "round", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Match> matchList;
+
+    @ManyToOne
+    @JoinColumn(name = "tournament_id")
+    private Tournament tournament;
+
+    public Round delete(Match match) {
+        matchList.remove(match);
+        match.setRound(null);
+        return this;
+    }
 
 
 
