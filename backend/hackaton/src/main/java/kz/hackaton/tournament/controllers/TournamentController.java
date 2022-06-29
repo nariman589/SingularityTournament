@@ -19,7 +19,7 @@ public class TournamentController {
     private final TournamentService tournamentService;
 
     @PostMapping("/join/{tour_id}")
-    public ResponseEntity<ResponseMessage> joinTourney(Principal principal,@PathVariable(name = "tour_id") Long id) {
+    public ResponseEntity<ResponseMessage> joinTourney(Principal principal, @PathVariable(name = "tour_id") Long id) {
         tournamentService.joinTourney(principal.getName(), id);
         return new ResponseEntity<>(ResponseMessage.builder().statusCode(200).message("Succesfully added").build(), HttpStatus.OK);
     }
@@ -34,11 +34,11 @@ public class TournamentController {
     @PostMapping("/start/{id}")
     public ResponseEntity<ResponseMessage> startTourney(@PathVariable(name = "id") Long id, Principal principal) {
 
-        tournamentService.startTourney(id,principal.getName());
+        tournamentService.startTourney(id, principal.getName());
         return new ResponseEntity<>(ResponseMessage.builder().statusCode(200).message("Succesfully added").build(), HttpStatus.OK);
     }
 
-    @PostMapping("/result_winner")
+    @PostMapping("/result-winner")
     public ResponseEntity<ResponseMessage> resultWinner(@RequestBody WinnerResult winnerResult, Principal principal) {
         tournamentService.winnerResult(winnerResult, principal.getName());
 
@@ -47,12 +47,12 @@ public class TournamentController {
 
 
     @GetMapping("/tourney/{status}")
-    public  List<RegisterTourneyDto> getTournament(@PathVariable String status) {
+    public List<RegisterTourneyDto> getTournament(@PathVariable String status) {
         return tournamentService.getRegisterTournaments(status);
     }
 
     @GetMapping("/tourney/id/{id}")
-    public  TournamentFullDetailsDto getDetailsTournament(@PathVariable Long id) {
+    public TournamentFullDetailsDto getDetailsTournament(@PathVariable Long id) {
         return tournamentService.getDetailsTournament(id);
     }
 
@@ -67,12 +67,12 @@ public class TournamentController {
         return tournamentService.getLeaderBoard(id);
     }
 
-//    @GetMapping("/tourney/leaderboard/{id}")
-//    public TournamentBracketDto getDetailsTournamentLeaderBoard(@PathVariable Long id) {
-//        return tournamentService.getDetailsTournamentLeaderBoard(id);
-//    }
+    @PostMapping("/info")
+    public ResponseEntity<ResponseMessage> info(@RequestBody InfoDto infoDto, Principal principal) {
+        tournamentService.info(infoDto, principal.getName());
 
-
+        return new ResponseEntity<>(ResponseMessage.builder().statusCode(200).message("Succesfully added").build(), HttpStatus.OK);
+    }
 
 
 }

@@ -13,6 +13,9 @@ public class TournamentBracketDto {
     private String name;
     private String type;
     private String description;
+    private String startedDate;
+
+    private String finishedDate;
     private List<RoundDto> roundList;
 
     public TournamentBracketDto(Long id, String name, String type, String description) {

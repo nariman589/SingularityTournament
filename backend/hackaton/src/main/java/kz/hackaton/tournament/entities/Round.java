@@ -18,9 +18,13 @@ public class Round {
     @Column(name = "stage")
     private Integer stage;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "round_id")
     private List<Match> matchList;
+
+
+
+
 
 
 

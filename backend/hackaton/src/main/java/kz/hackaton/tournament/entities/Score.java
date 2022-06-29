@@ -14,5 +14,7 @@ public class Score {
     private enum Scores {
         S1, S0;
     }
+
+
 }
 

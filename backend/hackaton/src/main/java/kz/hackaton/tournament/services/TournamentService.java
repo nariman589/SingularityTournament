@@ -1,10 +1,7 @@
 package kz.hackaton.tournament.services;
 
 import kz.hackaton.tournament.dto.*;
-import kz.hackaton.tournament.entities.Match;
-import kz.hackaton.tournament.entities.Round;
-import kz.hackaton.tournament.entities.Tournament;
-import kz.hackaton.tournament.entities.User;
+import kz.hackaton.tournament.entities.*;
 import kz.hackaton.tournament.exceptions.TournamentException;
 import kz.hackaton.tournament.repositories.TournamentRepositories;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +23,7 @@ public class TournamentService {
     private final TournamentRepositories tournamentRepositories;
     private final UserService userService;
     private final RoundService roundService;
-
+    private final UserFactService userFactService;
     private final MatchService matchService;
 
     @Transactional
@@ -90,7 +87,9 @@ public class TournamentService {
     @Transactional
     public void winnerResult(WinnerResult winnerResult, String name) {
 
-        Long authId = userService.findUserByLogin(name).getId();
+        User userFromLogin = userService.findUserByLogin(name);
+        User userFromDto = userService.findUserBySurnameAndName(winnerResult.getSurname(), winnerResult.getName());
+
         Tournament tournament = tournamentRepositories.findById(winnerResult.getTournamentId()).get();
         LocalDate startedDate = tournament.getStartedDate();
         LocalDate now = LocalDate.now();
@@ -100,15 +99,16 @@ public class TournamentService {
                     "Stage : " + winnerResult.getStage());
         }
         List<Match> matchList = tournament.getRoundList().get(winnerResult.getStage() - 1).getMatchList();
-        User userByLogin = userService.findUserByLogin(winnerResult.getWinnerLogin());
+
 
         for (Match m : matchList) {
-            if (m.getUser1().equals(userByLogin.getId()) || m.getUser2().equals(userByLogin.getId())) {
-                if (m.getUser1().equals(authId) || m.getUser2().equals(authId)) {
+            if (m.getUser1().equals(userFromDto.getId()) || m.getUser2().equals(userFromDto.getId())) {
+                if (m.getUser1().equals(userFromLogin.getId()) || m.getUser2().equals(userFromLogin.getId())) {
                     if (m.getWinner() != null) {
+
                         throw new TournamentException("Winner already exists");
                     }
-                    m.setWinner(userByLogin.getId());
+                    m.setWinner(userFromDto.getId());
                     return;
                 }
             }
@@ -121,6 +121,8 @@ public class TournamentService {
     public TournamentBracketDto getDetailsTournamentBracket(Long id) {
         Tournament tournament = tournamentRepositories.findById(id).get();
         TournamentBracketDto tournamentBracketDto = new TournamentBracketDto(tournament.getId(), tournament.getName(), tournament.getType(), tournament.getDescription());
+        tournamentBracketDto.setStartedDate(tournament.getStartedDate().toString());
+        tournamentBracketDto.setFinishedDate(tournament.getFinishedDate().toString());
         List<Round> rounds = tournament.getRoundList();
         List<RoundDto> roundDtos = new ArrayList<>();
         for (Round round : rounds) {
@@ -202,6 +204,52 @@ public class TournamentService {
 
         return leaderBoardDtoList;
 
+    }
+
+    public void deleteTournament(Long id) {
+        Tournament tournament = tournamentRepositories.findById(id).orElseThrow(() -> new TournamentException("Tournament doesn't exists"));
+        tournamentRepositories.deleteById(id);
+    }
+
+    @Transactional
+    public void info(InfoDto infoDto, String feedbackerLogin) {
+        User user = userService.findUserBySurnameAndName(infoDto.getSurname(), infoDto.getName());
+        if(user == null) {
+            throw new TournamentException("User not found");
+        }
+        User feedbacker = userService.findUserByLogin(feedbackerLogin);
+        if(feedbacker == null ) {
+            throw  new TournamentException("User not found");
+        }
+        UserFact userFact = new UserFact();
+        userFact.setFact(infoDto.getFact());
+        userFact.setId_of_feedbacker(feedbacker.getId());
+        userFact.setLearnedMaterial(infoDto.getDone());
+        userFactService.save(userFact);
+        user.getUserFacts().add(userFact);
+//        UserProfile userProfile = userByDto.getUserProfile();
+//        if(userProfile == null) {
+//            userProfile = new UserProfile();
+//            List<String> facts = userProfile.getFacts();
+//            if(facts == null) {
+//                facts = new ArrayList<>();
+//                facts.add(infoDto.getFact());
+//            }
+//
+//            List<String> done = userProfile.getDone();
+//            if(done == null) {
+//                done = new ArrayList<>();
+//                done.add(infoDto.getDone());
+//            }
+//            userProfile.setFacts(facts);
+//            userProfile.setDone(done);
+//            userProfile.setUser(userByDto);
+//            userByDto.setUserProfile(userProfile);
+//
+//            return;
+//        }
+//        userByDto.getUserProfile().getFacts().add(infoDto.getFact());
+//        userByDto.getUserProfile().getDone().add(infoDto.getDone());
     }
 
     @Transactional

@@ -45,6 +45,10 @@ public class UserService implements UserDetailsService {
        return name + " " + surname;
     }
 
+    public User findUserBySurnameAndName(String surname, String name){
+      return   userRepository.findUserBySurnameAndName(surname, name);
+    }
+
 
 
     public void save(User user) {
@@ -76,7 +80,7 @@ public class UserService implements UserDetailsService {
         savedUser.setSurname(jwtRequest.getSurname());
         savedUser.setMajor(jwtRequest.getMajor());
         Collection<Role> collection = new ArrayList<>();
-        collection.add(roleRepository.findById(1L).get());
+        collection.add(roleRepository.findById(2L).get());
         savedUser.setRoles(collection);
 
         return new BodyResponse("User created", Response.Status.OK, userRepository.save(savedUser));

@@ -5,10 +5,13 @@ server:
 #  servlet:
 #    session:
 #      timeout: 60s
+
+
+
+
 spring:
   datasource:
     sslmode: require
-    driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://ec2-44-206-89-185.compute-1.amazonaws.com:5432/df7bei5oqt8ouc
     username: wndobaytuzibvw
     password: 17bba88b52d94558cddbc8c061745e8c6e82e9be0e08ad922f5d19535329e52a
@@ -20,14 +23,10 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
 
-
-#  h2:
-#    console:
-#      enabled: true
   flyway:
     sslmode: required
     url: jdbc:postgresql://ec2-44-206-89-185.compute-1.amazonaws.com:5432/df7bei5oqt8ouc
     user: wndobaytuzibvw
     password: 17bba88b52d94558cddbc8c061745e8c6e82e9be0e08ad922f5d19535329e52a
-#    enabled: true
-#    locations: classpath:db/migrations
+    enabled: true
+    locations: classpath:db/migrations
