@@ -29,7 +29,11 @@ async function start(id) {
       }
     );
     const res = await req.json();
-    AlertMessage(res.message, 'success');
+    if (res.statusCode === 406) {
+      AlertMessage(res.message, 'error');
+    } else {
+      AlertMessage(res.message, 'success');
+    }
   } catch (error) {
     console.log(error);
   }

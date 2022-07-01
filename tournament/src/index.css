@@ -1,9 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Anek+Malayalam:wght@300;400&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anek+Malayalam:wght@300;400&display=swap');
 
 body {
   margin: 0;
-  font-family: "Anek Malayalam", sans-serif;
+  font-family: 'Anek Malayalam', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 500;
@@ -216,7 +216,7 @@ a {
 }
 .border-button:before,
 .border-button:after {
-  content: "";
+  content: '';
   position: absolute;
   width: 0;
   height: 0;
@@ -314,7 +314,7 @@ a {
   transition: 0.4s;
 }
 .double-border-button:after {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
@@ -345,7 +345,7 @@ a {
   transition: 0.4s;
 }
 .double-border-button-blue:after {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
@@ -399,7 +399,7 @@ a {
 .participantsList {
   margin: 0 auto;
   width: 100%;
-  margin-left: 20px;
+  /* margin-left: 20px; */
   /* text-align: center; */
 }
 .participantsListTtile {
@@ -483,7 +483,7 @@ a {
 }
 .closing-button:before,
 .closing-button:after {
-  content: "";
+  content: '';
   position: absolute;
   z-index: 4;
   top: 0;
@@ -521,7 +521,7 @@ a {
   position: relative;
 }
 .plays::before {
-  content: "VS";
+  content: 'VS';
   color: #fe6637;
   position: absolute;
   top: 40%;
@@ -647,7 +647,7 @@ a {
 }
 
 .participantsElemets {
-  font-family: "Anek Malayalam", sans-serif;
+  font-family: 'Anek Malayalam', sans-serif;
   box-shadow: 2px 5px 20px black;
   background-color: #23252d;
   margin: 20px auto;
@@ -706,4 +706,32 @@ a {
 
 .developer {
   margin-bottom: 15px;
+}
+
+.participantsListTtile > button {
+  text-align: center;
+}
+
+.accordion {
+  font-size: 24px;
+  background-color: #fe6637;
+  border: none;
+  color: white;
+  /* align-items: center; */
+  justify-content: center;
+  width: 100%;
+}
+
+.accordionItem {
+  display: flex;
+  width: 100%;
+}
+
+.item {
+  width: 100%;
+}
+
+.accordionPanel {
+  display: flex;
+  flex-wrap: wrap;
 }
