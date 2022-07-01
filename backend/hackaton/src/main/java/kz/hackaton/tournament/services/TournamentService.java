@@ -234,19 +234,31 @@ public class TournamentService {
         user.getUserFacts().add(userFact);
 
     }
-
     @Transactional
     public List<Round> generateRound(Tournament tournament) {
         List<User> users = (List<User>) tournament.getUsers();
         Collections.shuffle(users);
         List<Round> roundList = new ArrayList<>();
-        int userCount = users.size();
 
+        //adding bot
+        User bot = new User();
+        if(users.size()%2!=0) {
+           bot.setMajor("BOT");
+           users.add(bot);
+        }
+
+        int userCount = users.size();
         for (int i = 0; i < userCount - 1; i++) {
             Round round = new Round();
             round.setStage(i + 1);
             List<Match> matchList = new ArrayList<>();
             for (int j = 0; j < userCount / 2; j++) {
+                //if bot then continue
+                if(users.get(j).getMajor().equals(bot.getMajor())  ||
+                        users.get(userCount - 1 - j).getMajor().equals(bot.getMajor())) {
+                    continue;
+                }
+
                 Match match = new Match();
                 match.setUser1(users.get(j).getId());
                 match.setUser2(users.get(userCount - 1 - j).getId());
@@ -256,13 +268,15 @@ public class TournamentService {
 
             }
 
-             round.setMatchList(matchList);
+            round.setMatchList(matchList);
             round.setTournament(tournament);
             roundList.add(round);
             roundService.save(round);
 
             shuffleAlg(users);
         }
+        //removing bot
+        users.remove(bot);
         return roundList;
     }
 
