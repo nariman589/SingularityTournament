@@ -7,6 +7,8 @@ import ReactLoading from 'react-loading';
 import WinLose from '../buttons/winLose';
 import LeaderBoard from '../activeTournament/LeaderBoard';
 import Footer from '../pageElements/footer';
+import showFacts from '../functions/showFacts';
+import ShowFacts from '../buttons/ShowFacts';
 
 import {
   Accordion,
@@ -130,7 +132,9 @@ export default function ActiveTournamentPage() {
                                           className="plays"
                                         >
                                           <div className="firstPlayer winner">
-                                            {element.username1}
+                                            <ShowFacts
+                                              user={element.username1}
+                                            />
                                             <WinLose
                                               user={element.username1}
                                               userOpponent={element.username2}
@@ -142,7 +146,9 @@ export default function ActiveTournamentPage() {
                                             />
                                           </div>
                                           <div className="secondPlayer">
-                                            {element.username2}
+                                            <ShowFacts
+                                              user={element.username2}
+                                            />
                                           </div>
                                         </div>
                                       </div>
@@ -156,10 +162,14 @@ export default function ActiveTournamentPage() {
                                           className="plays"
                                         >
                                           <div className="firstPlayer ">
-                                            {element.username1}
+                                            <ShowFacts
+                                              user={element.username1}
+                                            />
                                           </div>
                                           <div className="secondPlayer winner">
-                                            {element.username2}
+                                            <ShowFacts
+                                              user={element.username2}
+                                            />
                                             <WinLose
                                               user={element.username2}
                                               userOpponent={element.username1}
@@ -185,7 +195,7 @@ export default function ActiveTournamentPage() {
                                         className="plays"
                                       >
                                         <div className="firstPlayer ">
-                                          {element.username1}
+                                          <ShowFacts user={element.username1} />
                                           <WinLose
                                             user={element.username1}
                                             userOpponent={element.username2}
@@ -197,7 +207,7 @@ export default function ActiveTournamentPage() {
                                           />
                                         </div>
                                         <div className="secondPlayer winner">
-                                          {element.username2}
+                                          <ShowFacts user={element.username2} />
                                         </div>
                                       </div>
                                     </div>
@@ -207,7 +217,7 @@ export default function ActiveTournamentPage() {
                                   <div className="playsWithBtn">
                                     <div key={element.login} className="plays">
                                       <div className="firstPlayer ">
-                                        {element.username1}
+                                        <ShowFacts user={element.username1} />
                                         <WinLose
                                           user={element.username1}
                                           userOpponent={element.username2}
@@ -218,7 +228,7 @@ export default function ActiveTournamentPage() {
                                         />
                                       </div>
                                       <div className="secondPlayer">
-                                        {element.username2}
+                                        <ShowFacts user={element.username2} />
                                       </div>
                                     </div>
                                   </div>
@@ -233,10 +243,10 @@ export default function ActiveTournamentPage() {
                                         className="plays"
                                       >
                                         <div className="firstPlayer winner">
-                                          {element.username1}
+                                          <ShowFacts user={element.username1} />
                                         </div>
                                         <div className="secondPlayer ">
-                                          {element.username2}
+                                          <ShowFacts user={element.username2} />
                                           <WinLose
                                             user={element.username1}
                                             userOpponent={element.username2}
@@ -255,10 +265,10 @@ export default function ActiveTournamentPage() {
                                   <div className="playsWithBtn">
                                     <div key={element.login} className="plays">
                                       <div className="firstPlayer ">
-                                        {element.username1}
+                                        <ShowFacts user={element.username1} />
                                       </div>
                                       <div className="secondPlayer">
-                                        {element.username2}
+                                        <ShowFacts user={element.username2} />
                                         <WinLose
                                           user={element.username2}
                                           userOpponent={element.username1}
@@ -276,10 +286,10 @@ export default function ActiveTournamentPage() {
                                 return (
                                   <div key={element.login} className="plays">
                                     <div className="firstPlayer winner">
-                                      {element.username1}
+                                      <ShowFacts user={element.username1} />
                                     </div>
                                     <div className="secondPlayer">
-                                      {element.username2}
+                                      <ShowFacts user={element.username2} />
                                     </div>
                                   </div>
                                 );
@@ -288,10 +298,18 @@ export default function ActiveTournamentPage() {
                                 return (
                                   <div key={element.login} className="plays">
                                     <div className="firstPlayer ">
-                                      {element.username1}
+                                      <ShowFacts user={element.username1} />
                                     </div>
                                     <div className="secondPlayer winner">
-                                      {element.username2}
+                                      <ShowFacts user={element.username2} />
+                                      {/* <button
+                                        className="playersBtn"
+                                        onClick={() => {
+                                          showFacts(element.username2);
+                                        }}
+                                      >
+                                        {element.username2}
+                                      </button> */}
                                     </div>
                                   </div>
                                 );
@@ -299,10 +317,10 @@ export default function ActiveTournamentPage() {
                               return (
                                 <div key={element.login} className="plays">
                                   <div className="firstPlayer ">
-                                    {element.username1}
+                                    <ShowFacts user={element.username1} />
                                   </div>
                                   <div className="secondPlayer">
-                                    {element.username2}
+                                    <ShowFacts user={element.username2} />
                                   </div>
                                 </div>
                               );

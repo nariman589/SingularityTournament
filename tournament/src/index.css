@@ -735,3 +735,10 @@ a {
   display: flex;
   flex-wrap: wrap;
 }
+
+.doneError {
+  color: red;
+}
+.factError {
+  color: red;
+}

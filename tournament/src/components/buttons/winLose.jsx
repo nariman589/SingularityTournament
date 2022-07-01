@@ -19,6 +19,7 @@ import { ChakraProvider, Textarea } from '@chakra-ui/react';
 import { Formik, Field } from 'formik';
 
 import React from 'react';
+import AlertMessage from '../functions/alert';
 
 async function setWinner(tournamentId, stage, login) {
   const token = sessionStorage.getItem('token');
@@ -31,7 +32,7 @@ async function setWinner(tournamentId, stage, login) {
       surname: surname,
     };
     const reqWinner = await fetch(
-      'http://localhost:8189/api/v1/app/tournament/result_winner',
+      'http://localhost:8189/api/v1/app/tournament/result-winner',
       {
         method: 'POST',
         body: JSON.stringify(values, null, 2),
@@ -45,11 +46,10 @@ async function setWinner(tournamentId, stage, login) {
     const res = await reqWinner.json();
 
     if (res.statusCode === 406) {
-      alert(res.message);
+      return false;
     }
-    if (reqWinner.ok) {
-      alert('winner setted');
-    }
+    console.log(res);
+    return true;
   } catch (err) {
     console.log(err);
   }
@@ -78,7 +78,10 @@ async function setFacts(user, fact, done) {
       }
     );
     const res = await req.json();
-    alert(res.message);
+    if (res.statusCode === 406) {
+      return false;
+    }
+    return true;
   } catch (err) {
     console.log(err);
   }
@@ -86,6 +89,7 @@ async function setFacts(user, fact, done) {
 
 export default function WinLose(user) {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
   if (!user.haveWinner) {
     return (
       <ChakraProvider>
@@ -108,14 +112,35 @@ export default function WinLose(user) {
                   tournamentId: '',
                 }}
                 onSubmit={(values) => {
-                  setWinner(user.tournamentId, user.stage, values.winner);
-                  setFacts(user.userOpponent, values.fact, values.done);
+                  // setWinner(user.tournamentId, user.stage, values.winner);
+                  // setFacts(user.userOpponent, values.fact, values.done);
+                  if (values.fact !== '' && values.done !== '') {
+                    // AlertMessage('All fields must be filled', 'error');
+
+                    const winner = setWinner(
+                      user.tournamentId,
+                      user.stage,
+                      values.winner
+                    );
+                    const facts = setFacts(
+                      user.userOpponent,
+                      values.fact,
+                      values.done
+                    );
+                    if (winner && facts) {
+                      AlertMessage('Added', 'success');
+                    } else {
+                      AlertMessage('Something went wrong', 'error');
+                    }
+
+                    console.log(values);
+                  }
                 }}
               >
                 {({ handleSubmit, errors, touched }) => (
                   <form onSubmit={handleSubmit}>
                     <VStack spacing={4} align="flex-start">
-                      <FormControl isInvalid={!!errors.name && touched.name}>
+                      <FormControl isInvalid={!!errors.fact && touched.fact}>
                         <FormLabel htmlFor="fact">
                           Tell something interesting about you opponent
                         </FormLabel>
@@ -125,11 +150,22 @@ export default function WinLose(user) {
                           name="fact"
                           type="text"
                           variant="filled"
+                          validate={(value) => {
+                            if (value.length >= 1) {
+                              document
+                                .querySelector('.factError')
+                                .setAttribute('hidden', 'true');
+                            } else {
+                              document
+                                .querySelector('.factError')
+                                .removeAttribute('hidden');
+                            }
+                          }}
                         />
+                        <div className="factError">Must be filled!</div>
                       </FormControl>
-                      <FormControl
-                        isInvalid={!!errors.description && touched.description}
-                      >
+
+                      <FormControl isInvalid={!!errors.done && touched.done}>
                         <FormLabel htmlFor="done">
                           What your opponent learned today ?
                         </FormLabel>
@@ -139,12 +175,25 @@ export default function WinLose(user) {
                           name="done"
                           type="text"
                           variant="filled"
+                          validate={(value) => {
+                            if (value.length >= 1) {
+                              document
+                                .querySelector('.doneError')
+                                .setAttribute('hidden', 'true');
+                            } else {
+                              document
+                                .querySelector('.doneError')
+                                .removeAttribute('hidden');
+                            }
+                          }}
                         />
+                        <div className="doneError">Must be filled!</div>
                       </FormControl>
 
                       <SelectControl
                         name="winner"
                         selectProps={{ placeholder: 'Select Winner' }}
+                        isRequired
                       >
                         <option value={`${user.user}`}>{user.user}</option>
                         <option value={`${user.userOpponent}`}>
