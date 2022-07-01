@@ -1,5 +1,5 @@
-import { ChakraProvider, Textarea } from "@chakra-ui/react";
-import { Formik, Field } from "formik";
+import { ChakraProvider, Textarea } from '@chakra-ui/react';
+import { Formik, Field } from 'formik';
 import {
   Box,
   Button,
@@ -9,12 +9,12 @@ import {
   FormErrorMessage,
   Input,
   VStack,
-} from "@chakra-ui/react";
-import { SelectControl } from "formik-chakra-ui";
-import doWeHaveToken from "./checkIfAutorized";
-import Header from "./header";
-import AlertMessage from "./alert";
-import Footer from "./footer";
+} from '@chakra-ui/react';
+import { SelectControl } from 'formik-chakra-ui';
+import doWeHaveToken from './checkIfAutorized';
+import Header from './header';
+import AlertMessage from './alert';
+import Footer from './footer';
 
 export default function CreateTournamentPage() {
   if (doWeHaveToken()) {
@@ -28,36 +28,36 @@ export default function CreateTournamentPage() {
           justify="center"
           h="80vh"
         >
-          <Box bg="#23252d" p={10} rounded="md" w={"80%"}>
+          <Box bg="#23252d" p={10} rounded="md" w={'80%'}>
             <Formik
               initialValues={{
-                name: "",
-                description: "",
-                type: "",
+                name: '',
+                description: '',
+                type: '',
               }}
               onSubmit={async (values) => {
                 try {
-                  const token = sessionStorage.getItem("token");
+                  const token = sessionStorage.getItem('token');
 
                   const req = await fetch(
-                    "http://localhost:8189/api/v1/app/tournament/create",
+                    'http://localhost:8189/api/v1/app/tournament/create',
                     {
-                      method: "POST",
+                      method: 'POST',
                       body: JSON.stringify(values, null, 2),
                       headers: {
-                        "Content-Type": "application/json",
-                        Accept: "application/json",
-                        "Access-Control-Allow-Origin": "*",
+                        'Content-Type': 'application/json',
+                        Accept: 'application/json',
+                        'Access-Control-Allow-Origin': '*',
                         Authorization: `Bearer ${token}`,
                       },
                     }
                   );
 
                   if (req.ok) {
-                    AlertMessage("Tournament added", "success");
-                    window.location.pathname = "/";
+                    AlertMessage('Tournament added', 'success');
+                    window.location.pathname = '/';
                   } else {
-                    AlertMessage("Something went wrong!", "error");
+                    AlertMessage('Something went wrong!', 'error');
                   }
                 } catch (error) {
                   console.log(error);
@@ -74,14 +74,15 @@ export default function CreateTournamentPage() {
                       <Field
                         as={Input}
                         id="name"
+                        bg="white"
                         name="name"
                         type="text"
-                        variant="filled"
+                        // variant="filled"
                         validate={(value) => {
                           let error;
 
                           if (value.length < 1) {
-                            error = "Must be filed";
+                            error = 'Must be filed';
                           }
 
                           return error;
@@ -100,12 +101,13 @@ export default function CreateTournamentPage() {
                         id="description"
                         name="description"
                         type="text"
-                        variant="filled"
+                        bg="white"
+                        // variant="filled"
                         validate={(value) => {
                           let error;
 
                           if (value.length < 1) {
-                            error = "Must be filed";
+                            error = 'Must be filed';
                           }
 
                           return error;
@@ -117,7 +119,8 @@ export default function CreateTournamentPage() {
                     <SelectControl
                       bg="white"
                       name="type"
-                      selectProps={{ placeholder: "Select Game" }}
+                      selectProps={{ placeholder: 'Select Game' }}
+                      isRequired
                     >
                       <option value="MortalKombat">Mortal Kombat</option>
                       <option value="Fifa">Fifa</option>
