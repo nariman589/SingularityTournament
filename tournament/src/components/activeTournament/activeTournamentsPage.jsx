@@ -7,7 +7,7 @@ import ReactLoading from 'react-loading';
 import WinLose from '../buttons/winLose';
 import LeaderBoard from '../activeTournament/LeaderBoard';
 import Footer from '../pageElements/footer';
-import showFacts from '../functions/showFacts';
+
 import ShowFacts from '../buttons/ShowFacts';
 
 import {

@@ -4,6 +4,7 @@ import CreateTournament from './components/createTpurnament/CreateTournament';
 import Footer from './components/pageElements/footer';
 import Header from './components/pageElements/header';
 import Tournaments from './components//openTournament/Tournaments';
+import RandomFact from './components/functions/RandomFact';
 
 function App() {
   if (doWeHaveToken()) {
@@ -17,6 +18,10 @@ function App() {
             alt="command picture"
           />
         </div> */}
+        <div className="mainPageTitle">
+          <h2>Tournaments</h2>
+        </div>
+        <RandomFact />
 
         <div className="mainPageTitle">
           <h2>Tournaments</h2>

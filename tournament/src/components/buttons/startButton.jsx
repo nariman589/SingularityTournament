@@ -1,10 +1,20 @@
+import React, { useCallback, useEffect, useState } from 'react';
 import AlertMessage from '../functions/alert';
+import ReactLoading from 'react-loading';
 
 export default function StartButton(id) {
+  const [btn, setBtn] = useState();
+
+  // useEffect(() => {}, []);
+
+  if (btn === 'pressed') {
+    return <ReactLoading color={'orange'} className="pressedBtn" />;
+  }
   return (
     <button
       onClick={() => {
         start(id);
+        setBtn('pressed');
       }}
       className="sliding-button"
     >

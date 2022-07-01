@@ -237,7 +237,11 @@ export default function WinLose(user) {
                 tournamentId: '',
               }}
               onSubmit={(values) => {
-                setFacts(user.userOpponent, values.fact, values.done);
+                if (setFacts(user.userOpponent, values.fact, values.done)) {
+                  AlertMessage('Facts added!', 'success');
+                } else {
+                  AlertMessage('Something went wrong!', 'error');
+                }
               }}
             >
               {({ handleSubmit, errors, touched }) => (
@@ -275,7 +279,12 @@ export default function WinLose(user) {
                       selectProps={{ placeholder: `Winner is ${user.winner}` }}
                     ></SelectControl>
 
-                    <Button type="submit" colorScheme="orange" width="full">
+                    <Button
+                      type="submit"
+                      colorScheme="orange"
+                      width="full"
+                      onClose={onClose}
+                    >
                       Submit
                     </Button>
                   </VStack>
