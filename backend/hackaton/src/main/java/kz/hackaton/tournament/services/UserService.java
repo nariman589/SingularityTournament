@@ -90,8 +90,11 @@ public class UserService implements UserDetailsService {
         return new BodyResponse("User created", Response.Status.OK, userRepository.save(savedUser));
     }
 
-    public UserFullDto userInfo(Long id) {
-        User user = userRepository.findById(id).orElseThrow(() -> new UserException("User not found"));
+    public UserFullDto userInfo(String surname, String name) {
+        User user = userRepository.findUserBySurnameAndName(surname, name);
+        if(user == null) {
+            throw new UserException("User not found");
+        }
         List<UserFact> userFacts = user.getUserFacts();
         UserFullDto userFullDto = new UserFullDto(user.getLogin(), user.getName(), user.getSurname(), user.getMajor());
         List<String> collect = userFacts.stream().map(UserFact::getFact).toList();

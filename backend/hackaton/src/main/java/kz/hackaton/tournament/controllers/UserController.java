@@ -8,10 +8,7 @@ import kz.hackaton.tournament.services.RoundService;
 import kz.hackaton.tournament.services.TournamentService;
 import kz.hackaton.tournament.services.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
@@ -29,9 +26,9 @@ public class UserController {
         return new UserDto(user.getLogin(), user.getName(), user.getSurname(), user.getMajor());
     }
 
-    @GetMapping("/{id}")
-    public UserFullDto getFullInfo(@PathVariable Long id) {
-        return userService.userInfo(id);
+    @GetMapping("/info")
+    public UserFullDto getFullInfo(@RequestParam String surname, @RequestParam String name) {
+        return userService.userInfo(surname, name);
 
     }
 
