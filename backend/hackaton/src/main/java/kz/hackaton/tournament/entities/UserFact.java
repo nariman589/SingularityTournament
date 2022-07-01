@@ -15,4 +15,8 @@ public class UserFact {
     private String fact;
     private String learnedMaterial;
     private long id_of_feedbacker;
+    @ManyToOne
+    @JoinColumn(name = "user_fact_id")
+    private User user;
+
 }

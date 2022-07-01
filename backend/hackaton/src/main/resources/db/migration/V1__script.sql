@@ -1,13 +1,3 @@
-
-create table user_fact
-(
-    id BIGSERIAL not null primary key,
-    fact VARCHAR(255) not null ,
-    learned_material varchar(255),
-    id_of_feedbacker bigint not null
-);
-
-
 create TABLE users
 (
     id BIGSERIAL NOT NULL PRIMARY KEY,
@@ -16,13 +6,22 @@ create TABLE users
     surname VARCHAR(255)  NOT NULL,
     major VARCHAR(255)  NOT NULL,
     password VARCHAR(255) NOT NULL,
-    tournament_id BIGINT,
-    user_fact_id BIGINT,
-    foreign key (user_fact_id) references user_fact(id)
+    tournament_id BIGINT
 --     user_profiles_id BIGINT,
 --     foreign key (user_profiles_id) references user_profile (id)
 
 );
+
+create table user_fact
+(
+    id BIGSERIAL not null primary key,
+    fact VARCHAR(255) not null ,
+    learned_material varchar(255),
+    id_of_feedbacker bigint not null,
+    user_fact_id BIGINT,
+    foreign key (user_fact_id) references users(id)
+);
+
 
 create TABLE tournaments
 (

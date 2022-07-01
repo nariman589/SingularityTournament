@@ -10,6 +10,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Getter
@@ -47,14 +48,21 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Collection<Role> roles;
 
-//    @OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "user_profiles_id", referencedColumnName = "id")
-//    private UserProfile userProfile;
 
-    @OneToMany
-    @JoinColumn(name = "user_fact_id")
+
+    @OneToMany(mappedBy = "user")
     private List<UserFact> userFacts = new ArrayList<>();
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id) && Objects.equals(login, user.login) && Objects.equals(name, user.name) && Objects.equals(surname, user.surname);
+    }
 
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, login, name, surname);
+    }
 }
