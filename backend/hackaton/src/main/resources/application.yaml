@@ -25,9 +25,8 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
 
 
-  h2:
-    console:
-      enabled: true
+
+
   flyway:
     sslmode: required
     url: jdbc:postgresql://ec2-44-206-89-185.compute-1.amazonaws.com:5432/df7bei5oqt8ouc
