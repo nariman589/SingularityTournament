@@ -11,10 +11,10 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import { SelectControl } from 'formik-chakra-ui';
-import doWeHaveToken from './checkIfAutorized';
-import Header from './header';
-import AlertMessage from './alert';
-import Footer from './footer';
+import doWeHaveToken from '../functions/checkIfAutorized';
+import Header from '../pageElements/header';
+import AlertMessage from '../functions/alert';
+import Footer from '../pageElements/footer';
 
 export default function CreateTournamentPage() {
   if (doWeHaveToken()) {

@@ -1,4 +1,4 @@
-import AlertMessage from "./alert";
+import AlertMessage from '../functions/alert';
 
 export default function StartButton(id) {
   return (
@@ -15,21 +15,21 @@ export default function StartButton(id) {
 
 async function start(id) {
   try {
-    const token = sessionStorage.getItem("token");
+    const token = sessionStorage.getItem('token');
     const req = await fetch(
       `http://localhost:8189/api/v1/app/tournament/start/${id.id}`,
       {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
           // "Access-Control-Allow-Origin": "*",
           Authorization: `Bearer ${token}`,
         },
       }
     );
     const res = await req.json();
-    AlertMessage(res.message, "success");
+    AlertMessage(res.message, 'success');
   } catch (error) {
     console.log(error);
   }

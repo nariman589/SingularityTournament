@@ -1,20 +1,20 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import "./index.css";
-import App from "./App";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
 
-import NotFoundPage from "./components/NotFoundPage";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Login from "./components/login";
-import Registration from "./components/registration";
-import CreateTournamentPage from "./components/createTournamentPage";
-import Profile from "./components/profile";
-import TournamentPage from "./components/tournamentPage";
-import ServerError from "./components/500";
-import ActiveTournamentPage from "./components/activeTournamentsPage";
-import Developers from "./components/developers";
+import NotFoundPage from './components/serverPages/NotFoundPage';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Login from './components/authPages/login';
+import Registration from './components/authPages/registration';
+import CreateTournamentPage from './components/createTpurnament/createTournamentPage';
+import Profile from './components/serverPages/profile';
+import TournamentPage from './components/openTournament/tournamentPage';
+import ServerError from './components/serverPages/500';
+import ActiveTournamentPage from './components/activeTournament/activeTournamentsPage';
+import Developers from './components/serverPages/developers';
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Router>

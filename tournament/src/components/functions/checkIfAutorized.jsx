@@ -1,5 +1,5 @@
 export default function doWeHaveToken() {
-  const token = sessionStorage.getItem("token");
+  const token = sessionStorage.getItem('token');
   if (token) {
     return isAutoraized(token);
   }
@@ -7,8 +7,8 @@ export default function doWeHaveToken() {
 }
 
 async function isAutoraized(token) {
-  const autorized = await fetch("api");
-  if (autorized.status != "ok") {
+  const autorized = await fetch('api');
+  if (autorized.status != 'ok') {
     return false;
   }
   return true;

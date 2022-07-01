@@ -1,4 +1,4 @@
-import { FormControl, SelectControl } from "formik-chakra-ui";
+import { FormControl, SelectControl } from 'formik-chakra-ui';
 import {
   Button,
   FormLabel,
@@ -14,16 +14,16 @@ import {
   FormErrorMessage,
   VStack,
   useDisclosure,
-} from "@chakra-ui/react";
-import { ChakraProvider, Textarea } from "@chakra-ui/react";
-import { Formik, Field } from "formik";
+} from '@chakra-ui/react';
+import { ChakraProvider, Textarea } from '@chakra-ui/react';
+import { Formik, Field } from 'formik';
 
-import React from "react";
+import React from 'react';
 
 async function setWinner(tournamentId, stage, login) {
-  const token = sessionStorage.getItem("token");
+  const token = sessionStorage.getItem('token');
   try {
-    const [name, surname] = login.split(" ");
+    const [name, surname] = login.split(' ');
     const values = {
       tournamentId: tournamentId,
       stage: stage.toString(),
@@ -31,13 +31,13 @@ async function setWinner(tournamentId, stage, login) {
       surname: surname,
     };
     const reqWinner = await fetch(
-      "http://localhost:8189/api/v1/app/tournament/result_winner",
+      'http://localhost:8189/api/v1/app/tournament/result_winner',
       {
-        method: "POST",
+        method: 'POST',
         body: JSON.stringify(values, null, 2),
         headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
           Authorization: `Bearer ${token}`,
         },
       }
@@ -48,7 +48,7 @@ async function setWinner(tournamentId, stage, login) {
       alert(res.message);
     }
     if (reqWinner.ok) {
-      alert("winner setted");
+      alert('winner setted');
     }
   } catch (err) {
     console.log(err);
@@ -56,8 +56,8 @@ async function setWinner(tournamentId, stage, login) {
 }
 
 async function setFacts(user, fact, done) {
-  const token = sessionStorage.getItem("token");
-  const [name, surname] = user.split(" ");
+  const token = sessionStorage.getItem('token');
+  const [name, surname] = user.split(' ');
   const values = {
     surname: surname,
     name: name,
@@ -66,13 +66,13 @@ async function setFacts(user, fact, done) {
   };
   try {
     const req = await fetch(
-      "http://localhost:8189/api/v1/app/tournament/info",
+      'http://localhost:8189/api/v1/app/tournament/info',
       {
-        method: "POST",
+        method: 'POST',
         body: JSON.stringify(values, null, 2),
         headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
           Authorization: `Bearer ${token}`,
         },
       }
@@ -101,11 +101,11 @@ export default function WinLose(user) {
             <ModalBody>
               <Formik
                 initialValues={{
-                  login: "",
-                  done: "",
-                  fact: "",
-                  winner: "",
-                  tournamentId: "",
+                  login: '',
+                  done: '',
+                  fact: '',
+                  winner: '',
+                  tournamentId: '',
                 }}
                 onSubmit={(values) => {
                   setWinner(user.tournamentId, user.stage, values.winner);
@@ -144,7 +144,7 @@ export default function WinLose(user) {
 
                       <SelectControl
                         name="winner"
-                        selectProps={{ placeholder: "Select Winner" }}
+                        selectProps={{ placeholder: 'Select Winner' }}
                       >
                         <option value={`${user.user}`}>{user.user}</option>
                         <option value={`${user.userOpponent}`}>
@@ -181,11 +181,11 @@ export default function WinLose(user) {
           <ModalBody>
             <Formik
               initialValues={{
-                login: "",
-                done: "",
-                fact: "",
-                winner: "",
-                tournamentId: "",
+                login: '',
+                done: '',
+                fact: '',
+                winner: '',
+                tournamentId: '',
               }}
               onSubmit={(values) => {
                 setFacts(user.userOpponent, values.fact, values.done);

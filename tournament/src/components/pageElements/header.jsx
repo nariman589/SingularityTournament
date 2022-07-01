@@ -1,4 +1,4 @@
-import doWeHaveToken from "./checkIfAutorized";
+import doWeHaveToken from '../functions/checkIfAutorized';
 
 export default function Header() {
   if (doWeHaveToken()) {

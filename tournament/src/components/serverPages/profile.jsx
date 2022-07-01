@@ -1,10 +1,10 @@
-import { ChakraProvider } from "@chakra-ui/react";
-import { useCallback, useEffect, useState } from "react";
-import isEmpty from "./checkEmpty";
-import doWeHaveToken from "./checkIfAutorized";
-import Header from "./header";
-import ReactLoading from "react-loading";
-import Footer from "./footer";
+import { ChakraProvider } from '@chakra-ui/react';
+import { useCallback, useEffect, useState } from 'react';
+import isEmpty from '../functions/checkEmpty';
+import doWeHaveToken from '../functions/checkIfAutorized';
+import Header from '../pageElements/header';
+import ReactLoading from 'react-loading';
+import Footer from '../pageElements/footer';
 
 // function profInfoImitation() {
 //   return
@@ -13,12 +13,12 @@ import Footer from "./footer";
 export default function Profile() {
   const [user, setUser] = useState();
   const profile = useCallback(async () => {
-    const token = sessionStorage.getItem("token");
-    const userReq = await fetch("http://localhost:8189/api/v1/app/user", {
-      method: "GET",
+    const token = sessionStorage.getItem('token');
+    const userReq = await fetch('http://localhost:8189/api/v1/app/user', {
+      method: 'GET',
       headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
         Authorization: `Bearer ${token}`,
       },
     });
@@ -53,7 +53,7 @@ export default function Profile() {
   return (
     <div className="profilePage">
       <Header />
-      <ReactLoading color={"orange"} className="center" />
+      <ReactLoading color={'orange'} className="center" />
       <Footer />
     </div>
   );

@@ -1,5 +1,5 @@
-import { Formik, Field } from "formik";
-import { ChakraProvider } from "@chakra-ui/react";
+import { Formik, Field } from 'formik';
+import { ChakraProvider } from '@chakra-ui/react';
 import {
   Box,
   Button,
@@ -9,8 +9,8 @@ import {
   FormErrorMessage,
   Input,
   VStack,
-} from "@chakra-ui/react";
-import AlertMessage from "./alert";
+} from '@chakra-ui/react';
+import AlertMessage from '../functions/alert';
 
 export default function Login() {
   return (
@@ -25,33 +25,33 @@ export default function Login() {
           <Formik
             bg="#23252d"
             initialValues={{
-              login: "",
-              password: "",
+              login: '',
+              password: '',
             }}
             onSubmit={async (values) => {
               try {
                 const req = await fetch(
-                  "http://localhost:8189/api/v1/app/auth",
+                  'http://localhost:8189/api/v1/app/auth',
                   {
-                    method: "POST",
+                    method: 'POST',
                     body: JSON.stringify(values, null, 2),
                     headers: {
-                      "Content-Type": "application/json",
-                      Accept: "application/json",
-                      "Access-Control-Allow-Origin": "*",
+                      'Content-Type': 'application/json',
+                      Accept: 'application/json',
+                      'Access-Control-Allow-Origin': '*',
                     },
                   }
                 );
                 const reqJ = await req.json();
                 if (reqJ.token) {
-                  sessionStorage.setItem("token", reqJ.token);
+                  sessionStorage.setItem('token', reqJ.token);
                   const userReq = await fetch(
-                    "http://localhost:8189/api/v1/app/user",
+                    'http://localhost:8189/api/v1/app/user',
                     {
-                      method: "GET",
+                      method: 'GET',
                       headers: {
-                        "Content-Type": "application/json",
-                        Accept: "application/json",
+                        'Content-Type': 'application/json',
+                        Accept: 'application/json',
                         Authorization: `Bearer ${reqJ.token}`,
                       },
                     }
@@ -59,17 +59,17 @@ export default function Login() {
 
                   const userRes = await userReq.json();
                   sessionStorage.setItem(
-                    "user",
+                    'user',
                     `${userRes.firstName} ${userRes.lastName}`
                   );
-                  sessionStorage.setItem("login", `${userRes.login}`);
-                  window.location.pathname = "/";
+                  sessionStorage.setItem('login', `${userRes.login}`);
+                  window.location.pathname = '/';
                 } else {
-                  AlertMessage(reqJ.message, "error");
+                  AlertMessage(reqJ.message, 'error');
                 }
                 //
               } catch (error) {
-                window.location.pathname = "/500";
+                window.location.pathname = '/500';
                 console.log(error);
               }
             }}
@@ -108,7 +108,7 @@ export default function Login() {
                         let error;
 
                         if (value.length < 3) {
-                          error = "Password must contain at least 3 characters";
+                          error = 'Password must contain at least 3 characters';
                         }
 
                         return error;

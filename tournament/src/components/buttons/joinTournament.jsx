@@ -1,4 +1,4 @@
-import AlertMessage from "./alert";
+import AlertMessage from '../functions/alert';
 
 export default function JoinTourney(id) {
   return (
@@ -15,24 +15,24 @@ export default function JoinTourney(id) {
 
 async function join(id) {
   try {
-    const token = sessionStorage.getItem("token");
+    const token = sessionStorage.getItem('token');
     const req = await fetch(
       `http://localhost:8189/api/v1/app/tournament/join/${id.id}`,
       {
-        method: "POST",
+        method: 'POST',
         headers: {
           Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-          Accept: "application/json",
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
         },
       }
     );
     if (req.ok) {
-      AlertMessage("You are added!", "success");
+      AlertMessage('You are added!', 'success');
     } else {
-      AlertMessage("You already in!", "error");
+      AlertMessage('You already in!', 'error');
     }
   } catch {
-    console.log("error");
+    console.log('error');
   }
 }

@@ -1,5 +1,5 @@
-import { Formik, Field } from "formik";
-import { ChakraProvider } from "@chakra-ui/react";
+import { Formik, Field } from 'formik';
+import { ChakraProvider } from '@chakra-ui/react';
 import {
   Box,
   Button,
@@ -9,9 +9,9 @@ import {
   FormErrorMessage,
   Input,
   VStack,
-} from "@chakra-ui/react";
-import { SelectControl } from "formik-chakra-ui";
-import AlertMessage from "./alert";
+} from '@chakra-ui/react';
+import { SelectControl } from 'formik-chakra-ui';
+import AlertMessage from '../functions/alert';
 
 export default function Registration() {
   return (
@@ -25,35 +25,35 @@ export default function Registration() {
         <Box bg="#23252d" p={6} rounded="md" w={64}>
           <Formik
             initialValues={{
-              login: "",
-              name: "",
-              surname: "",
-              major: "",
-              password: "",
+              login: '',
+              name: '',
+              surname: '',
+              major: '',
+              password: '',
             }}
             onSubmit={async (values) => {
               try {
                 const req = await fetch(
-                  "http://localhost:8189/api/v1/app/register",
+                  'http://localhost:8189/api/v1/app/register',
                   {
-                    method: "POST",
+                    method: 'POST',
                     body: JSON.stringify(values, null, 2),
                     headers: {
-                      "Content-Type": "application/json",
-                      Accept: "application/json",
-                      "Access-Control-Allow-Origin": "*",
+                      'Content-Type': 'application/json',
+                      Accept: 'application/json',
+                      'Access-Control-Allow-Origin': '*',
                     },
                   }
                 );
                 const res = await req.json();
 
-                if (res.statusCode === "OK") {
-                  window.location.pathname = "/login";
+                if (res.statusCode === 'OK') {
+                  window.location.pathname = '/login';
                 }
-                AlertMessage(res.message, "success");
+                AlertMessage(res.message, 'success');
                 // alert(res.message);
               } catch (error) {
-                window.location.pathname = "/500";
+                window.location.pathname = '/500';
                 console.log(error);
               }
             }}
@@ -89,7 +89,7 @@ export default function Registration() {
                         let error;
 
                         if (value.length < 1) {
-                          error = "Must be filed";
+                          error = 'Must be filed';
                         }
 
                         return error;
@@ -112,7 +112,7 @@ export default function Registration() {
                         let error;
 
                         if (value.length < 1) {
-                          error = "Must be filed";
+                          error = 'Must be filed';
                         }
 
                         return error;
@@ -125,7 +125,7 @@ export default function Registration() {
                     // color="white"
 
                     name="major"
-                    selectProps={{ placeholder: "Select major" }}
+                    selectProps={{ placeholder: 'Select major' }}
                   >
                     <option value="Frontend">Frontend</option>
                     <option value="Backend">Backend</option>
@@ -150,7 +150,7 @@ export default function Registration() {
                         let error;
 
                         if (value.length < 5) {
-                          error = "Password must contain at least 6 characters";
+                          error = 'Password must contain at least 6 characters';
                         }
 
                         return error;

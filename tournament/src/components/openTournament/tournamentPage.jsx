@@ -1,36 +1,36 @@
-import { ChakraProvider, useCallbackRef } from "@chakra-ui/react";
-import { useCallback, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import isEmpty from "./checkEmpty";
-import doWeHaveToken from "./checkIfAutorized";
-import Header from "./header";
-import ReactLoading from "react-loading";
-import JoinTourney from "./joinTournament";
-import StartButton from "./startButton";
-import AlertMessage from "./alert";
-import Footer from "./footer";
+import { ChakraProvider, useCallbackRef } from '@chakra-ui/react';
+import { useCallback, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import isEmpty from '../functions/checkEmpty';
+import doWeHaveToken from '../functions/checkIfAutorized';
+import Header from '../pageElements/header';
+import ReactLoading from 'react-loading';
+import JoinTourney from '../buttons/joinTournament';
+import StartButton from '../buttons/startButton';
+import AlertMessage from '../functions/alert';
+import Footer from '../pageElements/footer';
 
 async function tournamentDetails(id) {
-  const token = sessionStorage.getItem("token");
+  const token = sessionStorage.getItem('token');
   if (!token) {
-    AlertMessage("You must be authorized", "error");
+    AlertMessage('You must be authorized', 'error');
   }
   try {
     const req = await fetch(
       `http://localhost:8189/api/v1/app/tournament/tourney/id/${id}`,
       {
-        method: "GET",
+        method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-          Accept: "application/json",
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
         },
       }
     );
     const res = await req.json();
     return res;
   } catch (err) {
-    AlertMessage("myMessage", "success");
+    AlertMessage('myMessage', 'success');
   }
 }
 
@@ -43,7 +43,7 @@ export default function TournamentPage() {
       const data = await tournamentDetails(id);
       setTable(data);
     } catch {
-      console.log("error");
+      console.log('error');
     }
   });
 
@@ -51,7 +51,7 @@ export default function TournamentPage() {
     try {
       getTournament();
     } catch {
-      console.log("error");
+      console.log('error');
     }
   }, []);
 
@@ -100,7 +100,7 @@ export default function TournamentPage() {
   return (
     <div className="tournamentPage">
       <Header />
-      <ReactLoading color={"orange"} className="center" />
+      <ReactLoading color={'orange'} className="center" />
       <Footer />
     </div>
   );

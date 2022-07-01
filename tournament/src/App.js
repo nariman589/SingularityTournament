@@ -1,10 +1,9 @@
-import { useEffect } from "react";
-import ActiveTournaments from "./components/activeTournaments";
-import doWeHaveToken from "./components/checkIfAutorized";
-import CreateTournament from "./components/CreateTournament";
-import Footer from "./components/footer";
-import Header from "./components/header";
-import Tournaments from "./components/Tournaments";
+import ActiveTournaments from './components/activeTournament/activeTournaments';
+import doWeHaveToken from './components/functions/checkIfAutorized';
+import CreateTournament from './components/createTpurnament/CreateTournament';
+import Footer from './components/pageElements/footer';
+import Header from './components/pageElements/header';
+import Tournaments from './components//openTournament/Tournaments';
 
 function App() {
   if (doWeHaveToken()) {
