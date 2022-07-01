@@ -1,19 +1,19 @@
-import { useCallback, useEffect, useState } from 'react';
-import isEmpty from '../functions/checkEmpty';
-import ReactLoading from 'react-loading';
+import { useCallback, useEffect, useState } from "react";
+import isEmpty from "../functions/checkEmpty";
+import ReactLoading from "react-loading";
 
 export default function LeaderBoard(id) {
   const [leaderboard, setLeaderBoard] = useState();
 
   const makeReq = useCallback(async () => {
-    const token = sessionStorage.getItem('token');
+    const token = sessionStorage.getItem("token");
     const req = await fetch(
       `http://localhost:8189/api/v1/app/tournament/tourney/leaderboard/${id.id}`,
       {
-        method: 'GET',
+        method: "GET",
         headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
+          "Content-Type": "application/json",
+          Accept: "application/json",
           Authorization: `Bearer ${token}`,
         },
       }
@@ -43,7 +43,7 @@ export default function LeaderBoard(id) {
           <div className="leaders">
             <div className="secondPlace">
               <div className="leadersImg">
-                <img src={require('../logos/second.png')} alt="2place" />
+                <img src={require("../logos/second.png")} alt="2place" />
               </div>
               <div className="leaderDescr">
                 <div className="leaderName">
@@ -54,7 +54,7 @@ export default function LeaderBoard(id) {
             </div>
             <div className="fisrtPlace">
               <div className="leadersImg">
-                <img src={require('../logos/first.png')} alt="1place" />
+                <img src={require("../logos/first.png")} alt="1place" />
               </div>
               <div className="leaderDescr">
                 <div className="leaderName">
@@ -65,7 +65,7 @@ export default function LeaderBoard(id) {
             </div>
             <div className="thirdPlace">
               <div className="leadersImg">
-                <img src={require('../logos/third.png')} alt="3place" />
+                <img src={require("../logos/third.png")} alt="3place" />
               </div>
               <div className="leaderDescr">
                 <div className="leaderName">
@@ -96,7 +96,7 @@ export default function LeaderBoard(id) {
         <div className="leaders">
           <div className="secondPlace">
             <div className="leadersImg">
-              <img src={require('../logos/second.png')} alt="2place" />
+              <img src={require("../logos/second.png")} alt="2place" />
             </div>
             <div className="leaderDescr">
               <div className="leaderName">
@@ -108,7 +108,7 @@ export default function LeaderBoard(id) {
           </div>
           <div className="fisrtPlace">
             <div className="leadersImg">
-              <img src={require('../logos/first.png')} alt="1place" />
+              <img src={require("../logos/first.png")} alt="1place" />
             </div>
             <div className="leaderDescr">
               <div className="leaderName">
@@ -122,5 +122,5 @@ export default function LeaderBoard(id) {
       </div>
     );
   }
-  return <ReactLoading color={'orange'} className="center" />;
+  return <ReactLoading color={"orange"} className="center" />;
 }

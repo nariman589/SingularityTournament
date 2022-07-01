@@ -1,20 +1,20 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import AlertMessage from '../functions/alert';
-import ReactLoading from 'react-loading';
+import React, { useState } from "react";
+import AlertMessage from "../functions/alert";
+import ReactLoading from "react-loading";
 
 export default function StartButton(id) {
   const [btn, setBtn] = useState();
 
   // useEffect(() => {}, []);
 
-  if (btn === 'pressed') {
-    return <ReactLoading color={'orange'} className="pressedBtn" />;
+  if (btn === "pressed") {
+    return <ReactLoading color={"orange"} className="pressedBtn" />;
   }
   return (
     <button
       onClick={() => {
         start(id);
-        setBtn('pressed');
+        setBtn("pressed");
       }}
       className="sliding-button"
     >
@@ -25,14 +25,14 @@ export default function StartButton(id) {
 
 async function start(id) {
   try {
-    const token = sessionStorage.getItem('token');
+    const token = sessionStorage.getItem("token");
     const req = await fetch(
       `http://localhost:8189/api/v1/app/tournament/start/${id.id}`,
       {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
+          "Content-Type": "application/json",
+          Accept: "application/json",
           // "Access-Control-Allow-Origin": "*",
           Authorization: `Bearer ${token}`,
         },
@@ -40,9 +40,9 @@ async function start(id) {
     );
     const res = await req.json();
     if (res.statusCode === 406) {
-      AlertMessage(res.message, 'error');
+      AlertMessage(res.message, "error");
     } else {
-      AlertMessage(res.message, 'success');
+      AlertMessage(res.message, "success");
     }
   } catch (error) {
     console.log(error);

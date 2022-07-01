@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Anek+Malayalam:wght@300;400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Anek+Malayalam:wght@300;400&display=swap");
 
 body {
   margin: 0;
-  font-family: 'Anek Malayalam', sans-serif;
+  font-family: "Anek Malayalam", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 500;
@@ -86,15 +86,6 @@ a {
   margin-bottom: 20px;
 }
 
-@media (max-width: 700px) {
-  .BodyImage > img {
-    width: 80%;
-  }
-  .hover {
-    display: none;
-  }
-}
-
 .mainPageTitle {
   display: flex;
   width: 100%;
@@ -121,12 +112,13 @@ a {
 .tournamentInfo {
   width: 60%;
   /* max-width: 800px; */
-  box-shadow: 5px 5px 10px 2px rgba(0, 0, 0, 0.4);
+
   color: white;
 
   /* border-radius: 3px; */
   margin: 40px auto;
   padding: 20px;
+  box-shadow: 5px 5px 10px 2px rgba(0, 0, 0, 0.4);
   background-color: #23252d;
   height: calc(100% - 70px);
   position: relative;
@@ -216,7 +208,7 @@ a {
 }
 .border-button:before,
 .border-button:after {
-  content: '';
+  content: "";
   position: absolute;
   width: 0;
   height: 0;
@@ -314,7 +306,7 @@ a {
   transition: 0.4s;
 }
 .double-border-button:after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -345,7 +337,7 @@ a {
   transition: 0.4s;
 }
 .double-border-button-blue:after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -483,7 +475,7 @@ a {
 }
 .closing-button:before,
 .closing-button:after {
-  content: '';
+  content: "";
   position: absolute;
   z-index: 4;
   top: 0;
@@ -516,12 +508,13 @@ a {
   margin: 15px;
   justify-content: center;
   text-align: center;
-  width: 200px;
+  width: 210px;
   font-size: 18px;
   position: relative;
+  /* height: calc(100% - 70px); */
 }
 .plays::before {
-  content: 'VS';
+  content: "VS";
   color: #fe6637;
   position: absolute;
   top: 40%;
@@ -531,6 +524,9 @@ a {
 }
 .firstPlayer {
   padding-top: 20px;
+  padding-left: 25px;
+  padding-right: 25px;
+  /* padding-bottom: 25px; */
   position: relative;
   height: 60px;
   align-items: center;
@@ -539,6 +535,9 @@ a {
 }
 .secondPlayer {
   padding-top: 20px;
+  padding-left: 25px;
+  padding-right: 25px;
+  /* margin-bottom: 25px; */
   position: relative;
   height: 60px;
 }
@@ -598,48 +597,9 @@ a {
 
 .checker {
   position: absolute;
-
+  color: #fe6637;
   top: 20px;
   right: 10px;
-}
-
-@media (max-width: 767px) {
-  .Logo > img {
-    width: 150px;
-  }
-  .double-border-button-blue {
-    padding: 5px;
-    font-size: 12px;
-    margin: 5px;
-  }
-  .double-border-button {
-    padding: 5px;
-    font-size: 12px;
-    margin: 5px;
-  }
-
-  .headerUserNav {
-    /* margin-right: 10px; */
-    margin-left: 20px;
-    margin-right: 20px;
-  }
-  .tournamentList {
-    justify-items: center;
-    grid-template-columns: 1fr;
-  }
-  .tournayName {
-    font-size: 24px;
-    text-align: center;
-  }
-  .tournamentDate {
-    font-size: 14px;
-  }
-  .participantsListTtile {
-    font-size: 16px;
-  }
-  .participantsInfoDescr {
-    font-size: 14px;
-  }
 }
 
 .right {
@@ -647,7 +607,7 @@ a {
 }
 
 .participantsElemets {
-  font-family: 'Anek Malayalam', sans-serif;
+  font-family: "Anek Malayalam", sans-serif;
   box-shadow: 2px 5px 20px black;
   background-color: #23252d;
   margin: 20px auto;
@@ -734,6 +694,12 @@ a {
 .accordionPanel {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+}
+
+.leaderDescr {
+  /* width: 100px; */
+  justify-content: space-between;
 }
 
 .doneError {
@@ -745,4 +711,96 @@ a {
 
 .pressedBtn {
   margin: 0 auto;
+}
+
+.slide {
+  text-align: center;
+}
+
+.slideContent {
+  box-shadow: 5px 5px 10px 2px rgba(0, 0, 0, 0.4);
+  background-color: #23252d;
+  width: 200px;
+  margin: 0 auto;
+  color: white;
+  font-family: "Anek Malayalam", sans-serif;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 15px;
+  padding-top: 50px;
+  height: 200px;
+}
+.factAuthorName {
+  letter-spacing: 0;
+  padding-top: 10px;
+  margin-top: 10px;
+  border-top: 1px dashed white;
+  font-style: italic;
+}
+.factUserName {
+  letter-spacing: 0;
+  font-weight: 500;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px dashed white;
+}
+
+.slider {
+  /* margin-top: 0px; */
+  margin-bottom: 30px;
+  padding: 20px;
+}
+
+@media (max-width: 767px) {
+  .BodyImage > img {
+    width: 80%;
+  }
+  .hover {
+    display: none;
+  }
+  .slideContent {
+    width: 150px;
+  }
+  .Logo > img {
+    width: 150px;
+  }
+  .double-border-button-blue {
+    padding: 5px;
+    font-size: 12px;
+    margin: 5px;
+  }
+  .double-border-button {
+    padding: 5px;
+    font-size: 12px;
+    margin: 5px;
+  }
+
+  .headerUserNav {
+    /* margin-right: 10px; */
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  .tournamentList {
+    justify-items: center;
+    grid-template-columns: 1fr;
+  }
+  .tournayName {
+    font-size: 24px;
+    text-align: center;
+  }
+  .tournamentDate {
+    font-size: 14px;
+  }
+  .participantsListTtile {
+    font-size: 16px;
+  }
+  .participantsInfoDescr {
+    font-size: 14px;
+  }
+  .slider {
+    /* margin-top: 0px; */
+    margin-bottom: 20px;
+    padding: 10px;
+  }
 }

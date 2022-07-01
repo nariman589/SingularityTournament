@@ -1,10 +1,10 @@
-import ActiveTournaments from './components/activeTournament/activeTournaments';
-import doWeHaveToken from './components/functions/checkIfAutorized';
-import CreateTournament from './components/createTpurnament/CreateTournament';
-import Footer from './components/pageElements/footer';
-import Header from './components/pageElements/header';
-import Tournaments from './components//openTournament/Tournaments';
-import RandomFact from './components/functions/RandomFact';
+import ActiveTournaments from "./components/activeTournament/activeTournaments";
+import doWeHaveToken from "./components/functions/checkIfAutorized";
+import CreateTournament from "./components/createTpurnament/CreateTournament";
+import Footer from "./components/pageElements/footer";
+import Header from "./components/pageElements/header";
+import Tournaments from "./components//openTournament/Tournaments";
+import LastFact from "./components/functions/LastFact";
 
 function App() {
   if (doWeHaveToken()) {
@@ -19,9 +19,9 @@ function App() {
           />
         </div> */}
         <div className="mainPageTitle">
-          <h2>Tournaments</h2>
+          <h2>Last Facts</h2>
         </div>
-        <RandomFact />
+        <LastFact />
 
         <div className="mainPageTitle">
           <h2>Tournaments</h2>

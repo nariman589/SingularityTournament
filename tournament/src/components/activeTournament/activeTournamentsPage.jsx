@@ -1,35 +1,33 @@
-import { useCallback, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import isEmpty from '../functions/checkEmpty';
-import doWeHaveToken from '../functions/checkIfAutorized';
-import Header from '../pageElements/header';
-import ReactLoading from 'react-loading';
-import WinLose from '../buttons/winLose';
-import LeaderBoard from '../activeTournament/LeaderBoard';
-import Footer from '../pageElements/footer';
+import { useCallback, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import isEmpty from "../functions/checkEmpty";
+import doWeHaveToken from "../functions/checkIfAutorized";
+import Header from "../pageElements/header";
+import ReactLoading from "react-loading";
+import WinLose from "../buttons/winLose";
+import LeaderBoard from "../activeTournament/LeaderBoard";
+import Footer from "../pageElements/footer";
 
-import ShowFacts from '../buttons/ShowFacts';
+import ShowFacts from "../buttons/ShowFacts";
 
 import {
   Accordion,
   AccordionItem,
   AccordionButton,
   AccordionPanel,
-  AccordionIcon,
-  Box,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
 
 async function tournamentDetails(id) {
-  const token = sessionStorage.getItem('token');
+  const token = sessionStorage.getItem("token");
   try {
     const req = await fetch(
       `http://localhost:8189/api/v1/app/tournament/tourney/bracket/${id}`,
       {
-        method: 'GET',
+        method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
+          "Content-Type": "application/json",
+          Accept: "application/json",
         },
       }
     );
@@ -37,7 +35,7 @@ async function tournamentDetails(id) {
 
     return res;
   } catch {
-    console.log('error');
+    console.log("error");
   }
 }
 
@@ -49,23 +47,23 @@ export default function ActiveTournamentPage() {
       const data = await tournamentDetails(id);
       setTable(data);
     } catch {
-      console.log('error');
+      console.log("error");
     }
-  });
+  }, [id]);
 
   useEffect(() => {
     try {
       getTournament();
     } catch {
-      console.log('error');
+      console.log("error");
     }
-  }, []);
+  }, [getTournament]);
 
   if (doWeHaveToken() && !isEmpty(tournamentTable)) {
     const startedDate = new Date(tournamentTable.startedDate);
     let test = new Date(startedDate.setDate(startedDate.getDate() - 1));
-    const user = sessionStorage.getItem('user');
-    const login = sessionStorage.getItem('login');
+    const user = sessionStorage.getItem("user");
+    const login = sessionStorage.getItem("login");
     return (
       <div className="activeTournamentPage">
         <Header />
@@ -91,20 +89,23 @@ export default function ActiveTournamentPage() {
 
             <div className="participantsList">
               <Accordion>
-                {tournamentTable.roundList.map((elem, index) => {
+                {tournamentTable.roundList.map((elem, indx) => {
                   let day = test.getDay();
                   if (day === 5) {
                     test = new Date(test.setDate(test.getDate() + 3));
                   } else {
                     test = new Date(test.setDate(test.getDate() + 1));
                   }
-                  const dateResult = test.toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric',
+                  const dateResult = test.toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
                   });
                   return (
-                    <AccordionItem className="accordionItem">
+                    <AccordionItem
+                      className="accordionItem"
+                      key={`${elem}=${indx}`}
+                    >
                       <div className="item">
                         <div className="dateTitle">
                           <div className="participantsListTtile">
@@ -114,19 +115,20 @@ export default function ActiveTournamentPage() {
                               {/* </Box> */}
                             </AccordionButton>
                           </div>
-                          <div key={index} className="roundDate">
-                            {dateResult}
-                          </div>
+                          <div className="roundDate">{dateResult}</div>
                         </div>
 
                         <div className="playsBox">
                           <AccordionPanel className="accordionPanel" pb={4}>
-                            {elem.matches.map((element) => {
+                            {elem.matches.map((element, index) => {
                               if (element.winner) {
                                 if (user === element.winner) {
                                   if (element.winner === element.username1) {
                                     return (
-                                      <div className="playsWithBtn">
+                                      <div
+                                        className="playsWithBtn"
+                                        key={`${element}=${index}`}
+                                      >
                                         <div
                                           key={element.login}
                                           className="plays"
@@ -156,7 +158,10 @@ export default function ActiveTournamentPage() {
                                   }
                                   if (element.winner === element.username2) {
                                     return (
-                                      <div className="playsWithBtn">
+                                      <div
+                                        className="playsWithBtn"
+                                        key={`${element}=${index}`}
+                                      >
                                         <div
                                           key={element.login}
                                           className="plays"
@@ -189,7 +194,10 @@ export default function ActiveTournamentPage() {
                               if (user === element.username1) {
                                 if (element.winner === element.username2) {
                                   return (
-                                    <div className="playsWithBtn">
+                                    <div
+                                      className="playsWithBtn"
+                                      key={`${element}=${index}`}
+                                    >
                                       <div
                                         key={element.login}
                                         className="plays"
@@ -214,7 +222,10 @@ export default function ActiveTournamentPage() {
                                   );
                                 }
                                 return (
-                                  <div className="playsWithBtn">
+                                  <div
+                                    className="playsWithBtn"
+                                    key={`${element}=${index}`}
+                                  >
                                     <div key={element.login} className="plays">
                                       <div className="firstPlayer ">
                                         <ShowFacts user={element.username1} />
@@ -237,7 +248,10 @@ export default function ActiveTournamentPage() {
                               if (user === element.username2) {
                                 if (element.winner === element.username1) {
                                   return (
-                                    <div className="playsWithBtn">
+                                    <div
+                                      className="playsWithBtn"
+                                      key={`${element}=${index}`}
+                                    >
                                       <div
                                         key={element.login}
                                         className="plays"
@@ -262,7 +276,10 @@ export default function ActiveTournamentPage() {
                                   );
                                 }
                                 return (
-                                  <div className="playsWithBtn">
+                                  <div
+                                    className="playsWithBtn"
+                                    key={`${element}=${index}`}
+                                  >
                                     <div key={element.login} className="plays">
                                       <div className="firstPlayer ">
                                         <ShowFacts user={element.username1} />
@@ -284,7 +301,10 @@ export default function ActiveTournamentPage() {
                               }
                               if (element.winner === element.username1) {
                                 return (
-                                  <div key={element.login} className="plays">
+                                  <div
+                                    className="plays"
+                                    key={`${element}=${index}`}
+                                  >
                                     <div className="firstPlayer winner">
                                       <ShowFacts user={element.username1} />
                                     </div>
@@ -296,7 +316,10 @@ export default function ActiveTournamentPage() {
                               }
                               if (element.winner === element.username2) {
                                 return (
-                                  <div key={element.login} className="plays">
+                                  <div
+                                    className="plays"
+                                    key={`${element}=${index}`}
+                                  >
                                     <div className="firstPlayer ">
                                       <ShowFacts user={element.username1} />
                                     </div>
@@ -315,7 +338,10 @@ export default function ActiveTournamentPage() {
                                 );
                               }
                               return (
-                                <div key={element.login} className="plays">
+                                <div
+                                  className="plays"
+                                  key={`${element}=${index}`}
+                                >
                                   <div className="firstPlayer ">
                                     <ShowFacts user={element.username1} />
                                   </div>
@@ -342,7 +368,7 @@ export default function ActiveTournamentPage() {
   return (
     <div className="activeTournamentPage">
       <Header />
-      <ReactLoading color={'orange'} className="center" />
+      <ReactLoading color={"orange"} className="center" />
       <Footer />
     </div>
   );
