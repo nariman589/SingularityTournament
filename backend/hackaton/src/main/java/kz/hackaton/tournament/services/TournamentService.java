@@ -229,6 +229,7 @@ public class TournamentService {
         userFact.setFact(infoDto.getFact());
         userFact.setId_of_feedbacker(feedbacker.getId());
         userFact.setLearnedMaterial(infoDto.getDone());
+        userFact.setUser(user);
         userFactService.save(userFact);
         user.getUserFacts().add(userFact);
 
