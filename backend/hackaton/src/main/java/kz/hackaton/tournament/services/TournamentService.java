@@ -8,6 +8,8 @@ import kz.hackaton.tournament.repositories.TournamentRepositories;
 import lombok.RequiredArgsConstructor;
 import org.apache.tomcat.jni.Local;
 import org.hibernate.SessionFactory;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -210,6 +212,42 @@ public class TournamentService {
     public void deleteTournament(Long id) {
         Tournament tournament = tournamentRepositories.findById(id).orElseThrow(() -> new TournamentException("Tournament doesn't exists"));
         tournamentRepositories.deleteById(id);
+    }
+
+    public void deletePlayerFromTournament(Long tournament_id, String player_name, String player_surname) {
+
+        User user = userService.findUserBySurnameAndName(player_surname, player_name);
+        if(user == null) {
+            throw new TournamentException("user not found");//throw new UsernameNotFoundException("User not found");
+        }
+        Tournament tournament = tournamentRepositories.findById(tournament_id).orElseThrow(() -> new TournamentException("Tournament has not been found"));
+
+        List<Round> roundList = tournament.getRoundList();
+        for(Round r : roundList) {
+            List<Match> matchList = r.getMatchList();
+            for(Match m : matchList) {
+                if(m.getWinner() == null) {
+                    if(m.getUser1().equals(user.getId())) {
+                        m.setWinner(m.getUser2());
+                    }
+                    if(m.getUser2().equals(user.getId())) {
+                        m.setWinner(m.getUser1());
+                    }
+                }
+            }
+        }
+        tournamentRepositories.save(tournament);
+    }
+
+    public void deleteUser(String userName, String userSurname){
+        User user = userService.findUserBySurnameAndName(userSurname, userName);
+        Collection<Tournament> tournaments = user.getTournaments();
+        for(Tournament t : tournaments) {
+            deletePlayerFromTournament(t.getId(),user.getName(),user.getSurname());
+        }
+        user.setPassword("rakhim");
+        userService.save(user);
+
     }
 
     @Transactional

@@ -7,10 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
@@ -28,4 +25,18 @@ public class AdminController {
         return new ResponseEntity<>(ResponseMessage.builder().statusCode(200).message("Successfully deleted").build(), HttpStatus.OK);
     }
 
+    @DeleteMapping("/delete-player")
+    public ResponseEntity<ResponseMessage> deletePlayer(@RequestParam Long tournament_id,
+                                                        @RequestParam String player_name,
+                                                        @RequestParam String player_lastname) {
+        tournamentService.deletePlayerFromTournament(tournament_id, player_name, player_lastname);
+        return new ResponseEntity<>(ResponseMessage.builder().statusCode(200).message("Successfully deleted player from tournament").build(), HttpStatus.OK);
+    }
+
+    @PutMapping("/delete-user")
+    public ResponseEntity<ResponseMessage> deleteTournament(@RequestParam String user_name,
+                                                            @RequestParam String user_surname) {
+        tournamentService.deleteUser(user_name,user_surname);
+        return new ResponseEntity<>(ResponseMessage.builder().statusCode(200).message("Successfully deleted user").build(), HttpStatus.OK);
+    }
 }
