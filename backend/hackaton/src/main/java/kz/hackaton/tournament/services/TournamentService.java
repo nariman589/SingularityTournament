@@ -64,6 +64,20 @@ public class TournamentService {
     }
 
     @Transactional
+    public void registerTourneyForAdmin(CreateTournamentDto createTournamentDto, String name) {
+        Tournament tournament = new Tournament();
+        tournament.setName(createTournamentDto.getName());
+        tournament.setType(createTournamentDto.getType());
+        tournament.setCreatedDate(LocalDate.now());
+        tournament.setStatus("registration");
+        tournament.setDescription(createTournamentDto.getDescription());
+        tournament.setAdminOwner(true);
+        User owner = userService.findUserByLogin(name);
+        tournament.setOwner(owner.getId());
+        tournamentRepositories.save(tournament);
+    }
+
+    @Transactional
     public void startTourney(Long id, String login) {
         User userByLogin = userService.findUserByLogin(login);
 
@@ -213,39 +227,48 @@ public class TournamentService {
         Tournament tournament = tournamentRepositories.findById(id).orElseThrow(() -> new TournamentException("Tournament doesn't exists"));
         tournamentRepositories.deleteById(id);
     }
-
+    @Transactional
     public void deletePlayerFromTournament(Long tournament_id, String player_name, String player_surname) {
 
         User user = userService.findUserBySurnameAndName(player_surname, player_name);
-        if(user == null) {
-            throw new TournamentException("user not found");//throw new UsernameNotFoundException("User not found");
+        if (user == null) {
+            throw new UserException("user not found");//throw new UsernameNotFoundException("User not found");
         }
         Tournament tournament = tournamentRepositories.findById(tournament_id).orElseThrow(() -> new TournamentException("Tournament has not been found"));
 
         List<Round> roundList = tournament.getRoundList();
-        for(Round r : roundList) {
+        for (Round r : roundList) {
             List<Match> matchList = r.getMatchList();
-            for(Match m : matchList) {
-                if(m.getWinner() == null) {
-                    if(m.getUser1().equals(user.getId())) {
+            for (Match m : matchList) {
+                if (m.getWinner() == null) {
+                    if (m.getUser1().equals(user.getId())) {
                         m.setWinner(m.getUser2());
                     }
-                    if(m.getUser2().equals(user.getId())) {
+                    if (m.getUser2().equals(user.getId())) {
                         m.setWinner(m.getUser1());
                     }
                 }
             }
         }
-        tournamentRepositories.save(tournament);
+
     }
 
-    public void deleteUser(String userName, String userSurname){
+    @Transactional
+    public void deleteUser(String userName, String userSurname) {
         User user = userService.findUserBySurnameAndName(userSurname, userName);
-        Collection<Tournament> tournaments = user.getTournaments();
-        for(Tournament t : tournaments) {
-            deletePlayerFromTournament(t.getId(),user.getName(),user.getSurname());
+        if(user == null) {
+            throw new UserException("user not found");
         }
-        user.setPassword("rakhim");
+        Collection<Tournament> tournaments = user.getTournaments();
+        for (Tournament t : tournaments) {
+            deletePlayerFromTournament(t.getId(), user.getName(), user.getSurname());
+        }
+        user.setSurname("deleted");
+        user.setName("deleted");
+        user.setPassword("rakhimtimkabimka");
+        user.setMajor("deleted");
+        userFactService.deleteBatch(user.getUserFacts());
+        user.setUserFacts(null);
         userService.save(user);
 
     }
@@ -272,6 +295,7 @@ public class TournamentService {
         user.getUserFacts().add(userFact);
 
     }
+
     @Transactional
     public List<Round> generateRound(Tournament tournament) {
         List<User> users = (List<User>) tournament.getUsers();
@@ -280,9 +304,9 @@ public class TournamentService {
 
         //adding bot
         User bot = new User();
-        if(users.size()%2!=0) {
-           bot.setMajor("BOT");
-           users.add(bot);
+        if (users.size() % 2 != 0) {
+            bot.setMajor("BOT");
+            users.add(bot);
         }
 
         int userCount = users.size();
@@ -292,7 +316,7 @@ public class TournamentService {
             List<Match> matchList = new ArrayList<>();
             for (int j = 0; j < userCount / 2; j++) {
                 //if bot then continue
-                if(users.get(j).getMajor().equals(bot.getMajor())  ||
+                if (users.get(j).getMajor().equals(bot.getMajor()) ||
                         users.get(userCount - 1 - j).getMajor().equals(bot.getMajor())) {
                     continue;
                 }

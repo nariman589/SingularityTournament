@@ -1,6 +1,7 @@
 package kz.hackaton.tournament.controllers;
 
 
+import kz.hackaton.tournament.dto.CreateTournamentDto;
 import kz.hackaton.tournament.responses.ResponseMessage;
 import kz.hackaton.tournament.services.TournamentService;
 import lombok.RequiredArgsConstructor;
@@ -34,9 +35,17 @@ public class AdminController {
     }
 
     @PutMapping("/delete-user")
-    public ResponseEntity<ResponseMessage> deleteTournament(@RequestParam String user_name,
-                                                            @RequestParam String user_surname) {
-        tournamentService.deleteUser(user_name,user_surname);
+    public ResponseEntity<ResponseMessage> deleteTournament(@RequestParam(name = "username") String username,
+                                                            @RequestParam(name = "surname") String surname) {
+        tournamentService.deleteUser(username,surname);
         return new ResponseEntity<>(ResponseMessage.builder().statusCode(200).message("Successfully deleted user").build(), HttpStatus.OK);
     }
+
+    @PostMapping("/super/tourney")
+    public ResponseEntity<ResponseMessage> createTournament(@RequestBody CreateTournamentDto createTournamentDto, Principal principal) {
+        tournamentService.registerTourneyForAdmin(createTournamentDto, principal.getName());
+        return new ResponseEntity<>(ResponseMessage.builder().statusCode(200).message("Successfully created").build(), HttpStatus.OK);
+    }
+
+
 }

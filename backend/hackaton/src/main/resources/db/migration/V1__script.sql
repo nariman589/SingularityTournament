@@ -34,7 +34,8 @@ create TABLE tournaments
     started_date date,
     finished_date date,
     user_id BIGINT,
-    owner_id bigint
+    owner_id bigint,
+    admin_owner boolean
 
 
 );
