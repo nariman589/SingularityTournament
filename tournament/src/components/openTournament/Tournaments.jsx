@@ -1,15 +1,16 @@
-import { useCallback, useEffect, useState } from "react";
-import isEmpty from "../functions/checkEmpty";
+import { useCallback, useEffect, useState } from 'react';
+import isEmpty from '../functions/checkEmpty';
+import deleteTournament from '../buttons/deleteTournament';
 
 async function tournamentList() {
   try {
     const req = await fetch(
-      "http://localhost:8189/api/v1/app/tournament/tourney/registration",
+      'http://localhost:8189/api/v1/app/tournament/tourney/registration',
       {
-        method: "GET",
+        method: 'GET',
         headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
           // "Access-Control-Allow-Origin": "*",
         },
       }
@@ -46,23 +47,25 @@ export default function Tournaments() {
     }
   }, [showTournament]);
 
+  const isAdmin =
+    sessionStorage.getItem('role') === 'ROLE_ADMIN' ? true : false;
   if (isTournament) {
-    let tournamentImg = "default";
+    let tournamentImg = 'default';
     return (
       <div className="tournamentList">
         {tournament.map((elem, index) => {
           if (
-            elem.type === "UFC" ||
-            elem.type === "MortalKombat" ||
-            elem.type === "Tennis" ||
-            elem.type === "Fifa"
+            elem.type === 'UFC' ||
+            elem.type === 'MortalKombat' ||
+            elem.type === 'Tennis' ||
+            elem.type === 'Fifa'
           ) {
             tournamentImg = elem.type;
           } else {
-            tournamentImg = "default";
+            tournamentImg = 'default';
           }
           return (
-            <div className="tournamentInfo" key={`${elem.name}= ${index}`}>
+            <div className="tournamentInfo " key={`${elem.name}= ${index}`}>
               <div className="tournamentImg">
                 <img
                   src={`logos/${tournamentImg}.jpg`}
@@ -76,12 +79,22 @@ export default function Tournaments() {
 
               <div className="tournamentDescription">{elem.description}</div>
               <div className="tournamentPlayers">
-                <img src={`logos/gamePad.png`} width={25} alt="Players" />{" "}
+                <img src={`logos/gamePad.png`} width={25} alt="Players" />{' '}
                 {elem.participants}
               </div>
               <div className="viewTournaments">
                 <a href={`/tournament/${elem.id}`}>View</a>
               </div>
+              {isAdmin && (
+                <button
+                  className="deleteTournament"
+                  onClick={() => {
+                    deleteTournament(elem.id);
+                  }}
+                >
+                  ❌
+                </button>
+              )}
             </div>
           );
         })}

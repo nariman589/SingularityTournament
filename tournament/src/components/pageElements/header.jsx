@@ -1,6 +1,8 @@
 import doWeHaveToken from '../functions/checkIfAutorized';
 
 export default function Header() {
+  const isAdmin =
+    sessionStorage.getItem('role') === 'ROLE_ADMIN' ? true : false;
   if (doWeHaveToken()) {
     return (
       <div className="autorizationNavElemes">
@@ -10,7 +12,13 @@ export default function Header() {
             alt="SingLogo"
           />
         </a>
+
         <div className="headerUserNav">
+          {isAdmin && (
+            <a href="/admin" className="double-border-button">
+              Admin
+            </a>
+          )}
           <a href="/profile" className="double-border-button">
             Profile
           </a>

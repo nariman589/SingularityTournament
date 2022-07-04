@@ -1,9 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Anek+Malayalam:wght@300;400&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anek+Malayalam:wght@300;400&display=swap');
 
 body {
   margin: 0;
-  font-family: "Anek Malayalam", sans-serif;
+  font-family: 'Anek Malayalam', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 500;
@@ -208,7 +208,7 @@ a {
 }
 .border-button:before,
 .border-button:after {
-  content: "";
+  content: '';
   position: absolute;
   width: 0;
   height: 0;
@@ -306,7 +306,7 @@ a {
   transition: 0.4s;
 }
 .double-border-button:after {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
@@ -337,7 +337,7 @@ a {
   transition: 0.4s;
 }
 .double-border-button-blue:after {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
@@ -475,7 +475,7 @@ a {
 }
 .closing-button:before,
 .closing-button:after {
-  content: "";
+  content: '';
   position: absolute;
   z-index: 4;
   top: 0;
@@ -514,7 +514,7 @@ a {
   /* height: calc(100% - 70px); */
 }
 .plays::before {
-  content: "VS";
+  content: 'VS';
   color: #fe6637;
   position: absolute;
   top: 40%;
@@ -607,7 +607,7 @@ a {
 }
 
 .participantsElemets {
-  font-family: "Anek Malayalam", sans-serif;
+  font-family: 'Anek Malayalam', sans-serif;
   box-shadow: 2px 5px 20px black;
   background-color: #23252d;
   margin: 20px auto;
@@ -723,7 +723,7 @@ a {
   width: 200px;
   margin: 0 auto;
   color: white;
-  font-family: "Anek Malayalam", sans-serif;
+  font-family: 'Anek Malayalam', sans-serif;
   font-weight: 300;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -751,7 +751,32 @@ a {
   margin-bottom: 30px;
   padding: 20px;
 }
+.deleteTournament {
+  position: absolute;
+  right: 10px;
+  top: 20px;
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+.adminPageBody {
+  background-color: rgba(39, 42, 51, 0.95);
+}
 
+.superTournament {
+  box-shadow: 1px 2px 15px 1px #fe6637;
+}
+/* *,
+::before,
+::after {
+  box-sizing: unset;
+} */
+
+.deletePlayerBtn {
+  position: absolute;
+  left: 10px;
+}
 @media (max-width: 767px) {
   .BodyImage > img {
     width: 80%;
@@ -761,6 +786,7 @@ a {
   }
   .slideContent {
     width: 150px;
+    height: 100%;
   }
   .Logo > img {
     width: 150px;
@@ -802,5 +828,11 @@ a {
     /* margin-top: 0px; */
     margin-bottom: 20px;
     padding: 10px;
+  }
+}
+
+@media (max-width: 400px) {
+  .slideContent {
+    width: 120px;
   }
 }

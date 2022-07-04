@@ -13,6 +13,9 @@ import TournamentPage from './components/openTournament/tournamentPage';
 import ServerError from './components/serverPages/500';
 import ActiveTournamentPage from './components/activeTournament/activeTournamentsPage';
 import Developers from './components/serverPages/developers';
+import AdminPage from './components/serverPages/adminPage';
+import SuperTournamentPage from './components/serverPages/SuperTournamentPage';
+import DeletetUser from './components/serverPages/deleteUser';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -29,6 +32,12 @@ root.render(
         <Route path="/active/:id" element={<ActiveTournamentPage />} />
         <Route path="/500" element={<ServerError />} />
         <Route path="/developers" element={<Developers />} />
+        <Route path="/admin" element={<AdminPage />} />
+        <Route
+          path="/createAdminTournament"
+          element={<SuperTournamentPage />}
+        />
+        <Route path="/deleteUser" element={<DeletetUser />} />
       </Routes>
     </Router>
   </React.StrictMode>

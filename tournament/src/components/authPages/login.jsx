@@ -43,8 +43,13 @@ export default function Login() {
                   }
                 );
                 const reqJ = await req.json();
+
+                if (reqJ.roles) {
+                  sessionStorage.setItem('role', reqJ.roles[0]);
+                }
+
                 if (reqJ.token) {
-                  sessionStorage.setItem('token', reqJ.token);
+                  sessionStorage.setItem('token', `${reqJ.token}`);
                   const userReq = await fetch(
                     'http://localhost:8189/api/v1/app/user',
                     {

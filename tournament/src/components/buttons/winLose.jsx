@@ -1,4 +1,4 @@
-import { FormControl, SelectControl } from "formik-chakra-ui";
+import { FormControl, SelectControl } from 'formik-chakra-ui';
 import {
   Button,
   FormLabel,
@@ -12,17 +12,17 @@ import {
   // FormControl,
   VStack,
   useDisclosure,
-} from "@chakra-ui/react";
-import { ChakraProvider, Textarea } from "@chakra-ui/react";
-import { Formik, Field } from "formik";
+} from '@chakra-ui/react';
+import { ChakraProvider, Textarea } from '@chakra-ui/react';
+import { Formik, Field } from 'formik';
 
-import React from "react";
-import AlertMessage from "../functions/alert";
+import React from 'react';
+import AlertMessage from '../functions/alert';
 
 async function setWinner(tournamentId, stage, login) {
-  const token = sessionStorage.getItem("token");
+  const token = sessionStorage.getItem('token');
   try {
-    const [name, surname] = login.split(" ");
+    const [name, surname] = login.split(' ');
     const values = {
       tournamentId: tournamentId,
       stage: stage.toString(),
@@ -30,13 +30,13 @@ async function setWinner(tournamentId, stage, login) {
       surname: surname,
     };
     const reqWinner = await fetch(
-      "http://localhost:8189/api/v1/app/tournament/result-winner",
+      'http://localhost:8189/api/v1/app/tournament/result-winner',
       {
-        method: "POST",
+        method: 'POST',
         body: JSON.stringify(values, null, 2),
         headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
           Authorization: `Bearer ${token}`,
         },
       }
@@ -49,13 +49,13 @@ async function setWinner(tournamentId, stage, login) {
     return [true, res.message];
   } catch (err) {
     console.log(err);
-    return [false, "error"];
+    return [false, 'error'];
   }
 }
 
 async function setFacts(user, fact, done) {
-  const token = sessionStorage.getItem("token");
-  const [name, surname] = user.split(" ");
+  const token = sessionStorage.getItem('token');
+  const [name, surname] = user.split(' ');
   const values = {
     surname: surname,
     name: name,
@@ -64,13 +64,13 @@ async function setFacts(user, fact, done) {
   };
   try {
     const req = await fetch(
-      "http://localhost:8189/api/v1/app/tournament/info",
+      'http://localhost:8189/api/v1/app/tournament/info',
       {
-        method: "POST",
+        method: 'POST',
         body: JSON.stringify(values, null, 2),
         headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
           Authorization: `Bearer ${token}`,
         },
       }
@@ -103,16 +103,16 @@ export default function WinLose(user) {
             <ModalBody>
               <Formik
                 initialValues={{
-                  login: "",
-                  done: "",
-                  fact: "",
-                  winner: "",
-                  tournamentId: "",
+                  login: '',
+                  done: '',
+                  fact: '',
+                  winner: '',
+                  tournamentId: '',
                 }}
                 onSubmit={async (values) => {
                   // setWinner(user.tournamentId, user.stage, values.winner);
                   // setFacts(user.userOpponent, values.fact, values.done);
-                  if (values.fact !== "" && values.done !== "") {
+                  if (values.fact !== '' && values.done !== '') {
                     // AlertMessage('All fields must be filled', 'error');
 
                     const [winner, winnerMessage] = await setWinner(
@@ -128,10 +128,10 @@ export default function WinLose(user) {
                         values.done
                       );
                       if (facts) {
-                        AlertMessage("Added", "success");
+                        AlertMessage('Added', 'success');
                       }
                     } else {
-                      AlertMessage(winnerMessage, "error");
+                      AlertMessage(winnerMessage, 'error');
                     }
                     onClose();
                   }
@@ -153,12 +153,12 @@ export default function WinLose(user) {
                           validate={(value) => {
                             if (value.length >= 1) {
                               document
-                                .querySelector(".factError")
-                                .setAttribute("hidden", "true");
+                                .querySelector('.factError')
+                                .setAttribute('hidden', 'true');
                             } else {
                               document
-                                .querySelector(".factError")
-                                .removeAttribute("hidden");
+                                .querySelector('.factError')
+                                .removeAttribute('hidden');
                             }
                           }}
                         />
@@ -178,12 +178,12 @@ export default function WinLose(user) {
                           validate={(value) => {
                             if (value.length >= 1) {
                               document
-                                .querySelector(".doneError")
-                                .setAttribute("hidden", "true");
+                                .querySelector('.doneError')
+                                .setAttribute('hidden', 'true');
                             } else {
                               document
-                                .querySelector(".doneError")
-                                .removeAttribute("hidden");
+                                .querySelector('.doneError')
+                                .removeAttribute('hidden');
                             }
                           }}
                         />
@@ -192,7 +192,7 @@ export default function WinLose(user) {
 
                       <SelectControl
                         name="winner"
-                        selectProps={{ placeholder: "Select Winner" }}
+                        selectProps={{ placeholder: 'Select Winner' }}
                         isRequired
                       >
                         <option value={`${user.user}`}>{user.user}</option>
@@ -230,11 +230,11 @@ export default function WinLose(user) {
           <ModalBody>
             <Formik
               initialValues={{
-                login: "",
-                done: "",
-                fact: "",
-                winner: "",
-                tournamentId: "",
+                login: '',
+                done: '',
+                fact: '',
+                winner: '',
+                tournamentId: '',
               }}
               onSubmit={async (values) => {
                 const facts = await setFacts(
@@ -243,9 +243,9 @@ export default function WinLose(user) {
                   values.done
                 );
                 if (facts) {
-                  AlertMessage("Info added", "success");
+                  AlertMessage('Info added', 'success');
                 } else {
-                  AlertMessage("Something went wrong!(", "error");
+                  AlertMessage('Something went wrong!(', 'error');
                 }
                 onClose();
               }}
