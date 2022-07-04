@@ -27,6 +27,10 @@ public class UserFactService {
         userFactRepository.save(userFact);
     }
 
+    public void deleteBatch(List<UserFact> list) {
+        userFactRepository.deleteAllInBatch(list);
+    }
+
     @Transactional
     public List<TabloDto> findLastTenRow() {
         List<UserFact> lastTenRow = userFactRepository.findLastTenRow();

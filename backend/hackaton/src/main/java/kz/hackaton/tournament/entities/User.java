@@ -51,7 +51,7 @@ public class User {
 
 
     @OneToMany(mappedBy = "user")
-    private List<UserFact> userFacts = new ArrayList<>();
+    private List<UserFact> userFacts;
 
     @Override
     public boolean equals(Object o) {
