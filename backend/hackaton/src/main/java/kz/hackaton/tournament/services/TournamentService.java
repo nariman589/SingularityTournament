@@ -171,6 +171,7 @@ public class TournamentService {
                 tournament.getType(), tournament.getDescription());
         List<User> users = (List<User>) tournament.getUsers();
         List<UserDto> collect = users.stream().map((u) -> new UserDto(u.getLogin(), u.getName(), u.getSurname(), u.getMajor())).collect(Collectors.toList());
+        tournament.setAdminOwner(tournament.isAdminOwner());
         tournamentFullDetailsDto.setList(collect);
         return tournamentFullDetailsDto;
 
@@ -193,6 +194,7 @@ public class TournamentService {
             registerTourneyDto.setType(t.getType());
             registerTourneyDto.setParticipants(t.getUsers().size());
             registerTourneyDto.setDescription(t.getDescription());
+            registerTourneyDto.setAdminOwner(t.isAdminOwner());
             list.add(registerTourneyDto);
         }
         return list;
