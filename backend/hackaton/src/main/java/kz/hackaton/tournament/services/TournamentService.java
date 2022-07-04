@@ -357,6 +357,16 @@ public class TournamentService {
         return list;
     }
 
+    @Transactional
+    public void updateMatchResult(String winnerName, String winnerSurname, Long matchId) {
+        User user = userService.findUserBySurnameAndName(winnerSurname, winnerName);
+        if(user == null) {
+            throw new UserException("User has not been found");
+        }
+        Match match = matchService.getMatchById(matchId).orElseThrow(() -> new TournamentException("There is no such match"));
+        match.setWinner(user.getId());
+    }
+
 //    @Transactional
 //    public void getDetailsTournamentLeaderBoard(Long id) {
 //       Tournament tournament = tournamentRepositories.findById(id).orElseThrow(()-> new TournamentException("Tournament has not been found"));
