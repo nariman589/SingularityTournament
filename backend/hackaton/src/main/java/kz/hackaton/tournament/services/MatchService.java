@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -21,5 +22,7 @@ public class MatchService {
         matchRepository.save(match);
     }
 
-
+    public Optional<Match> getMatchById(Long id) {
+        return matchRepository.findById(id);
+    }
 }

@@ -39,4 +39,13 @@ public class AdminController {
         tournamentService.deleteUser(user_name,user_surname);
         return new ResponseEntity<>(ResponseMessage.builder().statusCode(200).message("Successfully deleted user").build(), HttpStatus.OK);
     }
+
+    @PutMapping("/change_result")
+    public ResponseEntity<ResponseMessage> updateMatchResult(@RequestParam String winnerName,
+                                                             @RequestParam String winnerSurname,
+                                                             @RequestParam Long match_id
+                                                                ) {
+        tournamentService.updateMatchResult(winnerName, winnerSurname, match_id);
+        return new ResponseEntity<>(ResponseMessage.builder().statusCode(200).message("Successfully updated match results").build(), HttpStatus.OK);
+    }
 }
