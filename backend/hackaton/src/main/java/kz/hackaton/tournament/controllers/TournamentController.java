@@ -21,28 +21,28 @@ public class TournamentController {
     @PostMapping("/join/{tour_id}")
     public ResponseEntity<ResponseMessage> joinTourney(Principal principal, @PathVariable(name = "tour_id") Long id) {
         tournamentService.joinTourney(principal.getName(), id);
-        return new ResponseEntity<>(ResponseMessage.builder().statusCode(200).message("Succesfully added").build(), HttpStatus.OK);
+        return new ResponseEntity<>(ResponseMessage.builder().statusCode(200).message("Successfully added").build(), HttpStatus.OK);
     }
 
     @PostMapping("/create")
     public ResponseEntity<ResponseMessage> createTourney(@RequestBody CreateTournamentDto createTournamentDto, Principal principal) {
 
         tournamentService.registerTourney(createTournamentDto, principal.getName());
-        return new ResponseEntity<>(ResponseMessage.builder().statusCode(200).message("Succesfully added").build(), HttpStatus.OK);
+        return new ResponseEntity<>(ResponseMessage.builder().statusCode(200).message("Successfully added").build(), HttpStatus.OK);
     }
 
     @PostMapping("/start/{id}")
     public ResponseEntity<ResponseMessage> startTourney(@PathVariable(name = "id") Long id, Principal principal) {
 
         tournamentService.startTourney(id, principal.getName());
-        return new ResponseEntity<>(ResponseMessage.builder().statusCode(200).message("Succesfully added").build(), HttpStatus.OK);
+        return new ResponseEntity<>(ResponseMessage.builder().statusCode(200).message("Successfully started").build(), HttpStatus.OK);
     }
 
     @PostMapping("/result-winner")
     public ResponseEntity<ResponseMessage> resultWinner(@RequestBody WinnerResult winnerResult, Principal principal) {
         tournamentService.winnerResult(winnerResult, principal.getName());
 
-        return new ResponseEntity<>(ResponseMessage.builder().statusCode(200).message("Succesfully added").build(), HttpStatus.OK);
+        return new ResponseEntity<>(ResponseMessage.builder().statusCode(200).message("Successfully added").build(), HttpStatus.OK);
     }
 
 
@@ -71,7 +71,7 @@ public class TournamentController {
     public ResponseEntity<ResponseMessage> info(@RequestBody InfoDto infoDto, Principal principal) {
         tournamentService.info(infoDto, principal.getName());
 
-        return new ResponseEntity<>(ResponseMessage.builder().statusCode(200).message("Succesfully added").build(), HttpStatus.OK);
+        return new ResponseEntity<>(ResponseMessage.builder().statusCode(200).message("Successfully added").build(), HttpStatus.OK);
     }
 
 

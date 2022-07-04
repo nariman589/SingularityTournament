@@ -7,7 +7,7 @@ server:
 #      timeout: 60s
 
 
-#
+
 #spring:
 #  datasource:
 #
@@ -33,7 +33,9 @@ server:
 #
 #    enabled: true
 #    locations: classpath:db/migration
+
 #
+
 
 
 spring:

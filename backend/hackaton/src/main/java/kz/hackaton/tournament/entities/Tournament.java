@@ -53,5 +53,8 @@ public class Tournament {
     @Column(name = "status")
     private String status;
 
+    @Column(name = "admin_owner")
+    private boolean adminOwner;
+
 
 }

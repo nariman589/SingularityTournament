@@ -15,4 +15,5 @@ public class RegisterTourneyDto {
     private String description;
 
     private Integer participants;
+    private boolean isAdminOwner;
 }

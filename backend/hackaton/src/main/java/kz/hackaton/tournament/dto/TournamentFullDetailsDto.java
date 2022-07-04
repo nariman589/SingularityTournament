@@ -15,6 +15,7 @@ public class TournamentFullDetailsDto {
     private String type;
     private String description;
     private List<UserDto> list;
+    private boolean isAdminOwner;
 
     public TournamentFullDetailsDto(Long id, String name, String type, String description) {
         this.id = id;
