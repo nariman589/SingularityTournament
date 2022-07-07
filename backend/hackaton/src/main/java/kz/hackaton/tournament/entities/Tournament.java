@@ -1,18 +1,28 @@
 package kz.hackaton.tournament.entities;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Collection;
+import java.util.Date;
+import java.util.List;
 
 @Entity
-@Table(name = "tournament")
+@Getter
+@Setter
+@Table(name = "tournaments")
 public class Tournament {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
+    @Column(name = "name")
     private String name;
 
+    @Column(name = "type")
     private String type;
 
     @ManyToMany
@@ -21,35 +31,30 @@ public class Tournament {
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private Collection<User> users;
 
-    public Long getId() {
-        return id;
-    }
+    @OneToMany(mappedBy = "tournament", cascade = CascadeType.REMOVE)
+    public List<Round> roundList;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @Column(name = "owner_id")
+    private Long owner;
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    @Column(name = "created_date")
+    private LocalDate createdDate;
 
-    public String getType() {
-        return type;
-    }
+    @Column(name = "description")
+    private String description;
 
-    public void setType(String type) {
-        this.type = type;
-    }
+    @Column(name = "started_date")
+    private LocalDate startedDate;
+    @Column(name = "finished_date")
+    private LocalDate finishedDate;
 
-    public Collection<User> getUsers() {
-        return users;
-    }
 
-    public void setUsers(Collection<User> users) {
-        this.users = users;
-    }
+    @Column(name = "status")
+    private String status;
+
+    @Column(name = "admin_owner")
+    private boolean adminOwner;
+
+
 }

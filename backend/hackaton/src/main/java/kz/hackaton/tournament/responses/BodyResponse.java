@@ -1,13 +1,14 @@
 package kz.hackaton.tournament.responses;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
+
+import javax.ws.rs.core.Response;
 
 @Data
 @AllArgsConstructor
-@Builder
-public class ResponseMessage {
+public class BodyResponse {
     private String message;
-    private int statusCode;
+    private Response.Status statusCode;
+    private Object body;
 }

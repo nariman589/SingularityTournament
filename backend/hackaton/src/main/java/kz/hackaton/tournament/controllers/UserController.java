@@ -1,23 +1,40 @@
 package kz.hackaton.tournament.controllers;
-
-import kz.hackaton.tournament.responses.ResponseMessage;
-import kz.hackaton.tournament.services.AuthServices;
+import kz.hackaton.tournament.dto.UserDto;
+import kz.hackaton.tournament.dto.UserFullDto;
+import kz.hackaton.tournament.entities.User;
+import kz.hackaton.tournament.repositories.UserRepository;
+import kz.hackaton.tournament.services.RoundService;
+import kz.hackaton.tournament.services.TournamentService;
+import kz.hackaton.tournament.services.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.security.Principal;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/user")
 @RequiredArgsConstructor
 public class UserController {
-        private final AuthServices authServices;
-    @PostMapping
-    public ResponseEntity<ResponseMessage> registration(@RequestBody UserDTO userDTO) {
-            return null;
+
+    private final UserService userService;
+    private final RoundService roundService;
+
+    @GetMapping
+    public UserDto getUser(Principal principal) {
+        User user = userService.findUserByLogin(principal.getName());
+        return new UserDto(user.getLogin(), user.getName(), user.getSurname(), user.getMajor());
     }
+
+    @GetMapping("/info")
+    public UserFullDto getFullInfo(@RequestParam String surname, @RequestParam String name) {
+        return userService.userInfo(surname, name);
+
+    }
+
+
+
+
+
 
 
 }

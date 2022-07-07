@@ -1,13 +1,13 @@
-package kz.hackaton.tournament.responses;
+package kz.hackaton.tournament.exceptions;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 
 @Data
 @AllArgsConstructor
-@Builder
-public class ResponseMessage {
+public class ExceptionMessage {
     private String message;
     private int statusCode;
+
+
 }
