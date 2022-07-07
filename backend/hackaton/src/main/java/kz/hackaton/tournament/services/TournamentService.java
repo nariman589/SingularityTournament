@@ -149,6 +149,7 @@ public class TournamentService {
             List<MatchDto> matchDtos = new ArrayList<>();
             for (Match match : matchList) {
                 MatchDto matchDto = new MatchDto();
+                matchDto.setMatch_id(match.getId());
                 matchDto.setUsername1(userService.getUserLogin(match.getUser1()));
                 matchDto.setUsername2(userService.getUserLogin(match.getUser2()));
                 if (match.getWinner() != null) {
