@@ -17,6 +17,7 @@ import {
   AccordionButton,
   AccordionPanel,
 } from '@chakra-ui/react';
+import ChangeWinner from '../buttons/changeWinner';
 
 async function tournamentDetails(id) {
   const token = sessionStorage.getItem('token');
@@ -33,7 +34,6 @@ async function tournamentDetails(id) {
       }
     );
     const res = await req.json();
-
     return res;
   } catch {
     console.log('error');
@@ -61,7 +61,6 @@ export default function ActiveTournamentPage() {
   }, [getTournament]);
 
   if (doWeHaveToken() && !isEmpty(tournamentTable)) {
-    console.log(tournamentTable);
     const startedDate = new Date(tournamentTable.startedDate);
     let test = new Date(startedDate.setDate(startedDate.getDate() - 1));
     const user = sessionStorage.getItem('user');
@@ -135,6 +134,11 @@ export default function ActiveTournamentPage() {
                                           key={element.login}
                                           className="plays"
                                         >
+                                          <ChangeWinner
+                                            user={element.username1}
+                                            userOpponent={element.username2}
+                                            match_id={element.match_id}
+                                          />
                                           <div className="firstPlayer winner">
                                             <DeletePlayer
                                               user={element.username1}
@@ -176,6 +180,11 @@ export default function ActiveTournamentPage() {
                                           key={element.login}
                                           className="plays"
                                         >
+                                          <ChangeWinner
+                                            user={element.username1}
+                                            userOpponent={element.username2}
+                                            match_id={element.match_id}
+                                          />
                                           <div className="firstPlayer ">
                                             <DeletePlayer
                                               user={element.username1}
@@ -220,6 +229,11 @@ export default function ActiveTournamentPage() {
                                         key={element.login}
                                         className="plays"
                                       >
+                                        <ChangeWinner
+                                          user={element.username1}
+                                          userOpponent={element.username2}
+                                          match_id={element.match_id}
+                                        />
                                         <div className="firstPlayer ">
                                           <DeletePlayer
                                             user={element.username1}
@@ -290,6 +304,11 @@ export default function ActiveTournamentPage() {
                                         key={element.login}
                                         className="plays"
                                       >
+                                        <ChangeWinner
+                                          user={element.username1}
+                                          userOpponent={element.username2}
+                                          match_id={element.match_id}
+                                        />
                                         <div className="firstPlayer winner">
                                           <DeletePlayer
                                             user={element.username1}
@@ -355,6 +374,11 @@ export default function ActiveTournamentPage() {
                                     className="plays"
                                     key={`${element}=${index}`}
                                   >
+                                    <ChangeWinner
+                                      user={element.username1}
+                                      userOpponent={element.username2}
+                                      match_id={element.match_id}
+                                    />
                                     <div className="firstPlayer winner">
                                       <DeletePlayer
                                         user={element.username1}
@@ -378,6 +402,11 @@ export default function ActiveTournamentPage() {
                                     className="plays"
                                     key={`${element}=${index}`}
                                   >
+                                    <ChangeWinner
+                                      user={element.username1}
+                                      userOpponent={element.username2}
+                                      match_id={element.match_id}
+                                    />
                                     <div className="firstPlayer ">
                                       <DeletePlayer
                                         user={element.username1}

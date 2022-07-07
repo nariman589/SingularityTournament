@@ -764,7 +764,7 @@ a {
   background-color: rgba(39, 42, 51, 0.95);
 }
 
-.superTournament {
+.super {
   box-shadow: 1px 2px 15px 1px #fe6637;
 }
 /* *,
@@ -776,6 +776,12 @@ a {
 .deletePlayerBtn {
   position: absolute;
   left: 10px;
+}
+.changer {
+  position: absolute;
+  right: -16px;
+  top: 50px;
+  color: white;
 }
 @media (max-width: 767px) {
   .BodyImage > img {

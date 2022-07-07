@@ -56,6 +56,12 @@ export default function ActiveTournaments() {
     return (
       <div className="tournamentList">
         {tournament.map((elem, index) => {
+          let divClass;
+          if (elem.adminOwner) {
+            divClass = 'tournamentInfo super';
+          } else {
+            divClass = 'tournamentInfo';
+          }
           if (
             elem.type === 'UFC' ||
             elem.type === 'MortalKombat' ||
@@ -67,7 +73,7 @@ export default function ActiveTournaments() {
             tournamentImg = 'default';
           }
           return (
-            <div className="tournamentInfo" key={`${elem.name}=${index}`}>
+            <div className={divClass} key={`${elem.name}=${index}`}>
               <div className="tournamentImg">
                 <img
                   src={`logos/${tournamentImg}.jpg`}

@@ -64,8 +64,14 @@ export default function Tournaments() {
           } else {
             tournamentImg = 'default';
           }
+          let divClass;
+          if (elem.adminOwner) {
+            divClass = 'tournamentInfo super';
+          } else {
+            divClass = 'tournamentInfo';
+          }
           return (
-            <div className="tournamentInfo " key={`${elem.name}= ${index}`}>
+            <div className={divClass} key={`${elem.name}= ${index}`}>
               <div className="tournamentImg">
                 <img
                   src={`logos/${tournamentImg}.jpg`}
