@@ -1,5 +1,5 @@
-import { Formik, Field } from "formik";
-import { ChakraProvider } from "@chakra-ui/react";
+import { Formik, Field } from 'formik';
+import { ChakraProvider } from '@chakra-ui/react';
 import {
   Box,
   Button,
@@ -9,52 +9,87 @@ import {
   FormErrorMessage,
   Input,
   VStack,
-} from "@chakra-ui/react";
-import { SelectControl } from "formik-chakra-ui";
+} from '@chakra-ui/react';
+import { SelectControl } from 'formik-chakra-ui';
+import AlertMessage from '../functions/alert';
 
 export default function Registration() {
   return (
     <ChakraProvider>
-      <Flex bg="gray.100" align="center" justify="center" h="100vh">
-        <Box bg="white" p={6} rounded="md" w={64}>
+      <Flex
+        bg="rgba(39, 42, 51, 0.95)"
+        align="center"
+        justify="center"
+        h="100vh"
+      >
+        <Box bg="#23252d" p={6} rounded="md" w={64}>
           <Formik
             initialValues={{
-              login: "",
-              name: "",
-              surname: "",
-              major: "",
-              password: "",
+              login: '',
+              name: '',
+              surname: '',
+              major: '',
+              password: '',
             }}
-            onSubmit={(values) => {
-              alert(JSON.stringify(values, null, 2));
+            onSubmit={async (values) => {
+              try {
+                const req = await fetch(
+                  'http://localhost:8189/api/v1/app/register',
+                  {
+                    method: 'POST',
+                    body: JSON.stringify(values, null, 2),
+                    headers: {
+                      'Content-Type': 'application/json',
+                      Accept: 'application/json',
+                      'Access-Control-Allow-Origin': '*',
+                    },
+                  }
+                );
+                const res = await req.json();
+
+                if (res.statusCode === 'OK') {
+                  window.location.pathname = '/login';
+                }
+                AlertMessage(res.message, 'success');
+                // alert(res.message);
+              } catch (error) {
+                window.location.pathname = '/500';
+                console.log(error);
+              }
             }}
           >
             {({ handleSubmit, errors, touched }) => (
               <form onSubmit={handleSubmit}>
                 <VStack spacing={4} align="flex-start">
                   <FormControl>
-                    <FormLabel htmlFor="text">Login</FormLabel>
+                    <FormLabel color="white" htmlFor="text">
+                      Login
+                    </FormLabel>
                     <Field
                       as={Input}
                       id="login"
                       name="login"
                       type="login"
-                      variant="filled"
+                      bg="white"
+                      // variant="filled"
                     />
                   </FormControl>
                   <FormControl isInvalid={!!errors.name && touched.name}>
-                    <FormLabel htmlFor="name">Name</FormLabel>
+                    <FormLabel color="white" htmlFor="name">
+                      Name
+                    </FormLabel>
                     <Field
                       as={Input}
                       id="name"
                       name="name"
                       type="text"
-                      variant="filled"
+                      bg="white"
+                      // variant="filled"
                       validate={(value) => {
                         let error;
 
                         if (value.length < 1) {
-                          error = "Must be filed";
+                          error = 'Must be filed';
                         }
 
                         return error;
@@ -63,18 +98,21 @@ export default function Registration() {
                     <FormErrorMessage>{errors.name}</FormErrorMessage>
                   </FormControl>
                   <FormControl isInvalid={!!errors.surname && touched.surname}>
-                    <FormLabel htmlFor="surname">Surname</FormLabel>
+                    <FormLabel color="white" htmlFor="surname">
+                      Surname
+                    </FormLabel>
                     <Field
                       as={Input}
                       id="surname"
                       name="surname"
                       type="text"
-                      variant="filled"
+                      bg="white"
+                      // variant="filled"
                       validate={(value) => {
                         let error;
 
                         if (value.length < 1) {
-                          error = "Must be filed";
+                          error = 'Must be filed';
                         }
 
                         return error;
@@ -83,8 +121,11 @@ export default function Registration() {
                     <FormErrorMessage>{errors.surname}</FormErrorMessage>
                   </FormControl>
                   <SelectControl
+                    bg="white"
+                    // color="white"
+
                     name="major"
-                    selectProps={{ placeholder: "Select major" }}
+                    selectProps={{ placeholder: 'Select major' }}
                   >
                     <option value="Frontend">Frontend</option>
                     <option value="Backend">Backend</option>
@@ -92,41 +133,24 @@ export default function Registration() {
                     <option value="Android">Android</option>
                     <option value="DevOps">DevOps</option>
                   </SelectControl>
-                  {/* <FormControl isInvalid={!!errors.major && touched.major}>
-                    <FormLabel htmlFor="major">major</FormLabel>
-                    <Field
-                      as={Input}
-                      id="major"
-                      name="major"
-                      type="text"
-                      variant="filled"
-                      validate={(value) => {
-                        let error;
-
-                        if (value.length < 1) {
-                          error = "Must be filed";
-                        }
-
-                        return error;
-                      }}
-                    />
-                    <FormErrorMessage>{errors.major}</FormErrorMessage>
-                  </FormControl> */}
                   <FormControl
                     isInvalid={!!errors.password && touched.password}
                   >
-                    <FormLabel htmlFor="password">Password</FormLabel>
+                    <FormLabel color="white" htmlFor="password">
+                      Password
+                    </FormLabel>
                     <Field
                       as={Input}
                       id="password"
                       name="password"
                       type="password"
-                      variant="filled"
+                      bg="white"
+                      // variant="filled"
                       validate={(value) => {
                         let error;
 
                         if (value.length < 5) {
-                          error = "Password must contain at least 6 characters";
+                          error = 'Password must contain at least 6 characters';
                         }
 
                         return error;
