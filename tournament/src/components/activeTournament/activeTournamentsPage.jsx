@@ -1,42 +1,42 @@
-import { useCallback, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import isEmpty from '../functions/checkEmpty';
-import doWeHaveToken from '../functions/checkIfAutorized';
-import Header from '../pageElements/header';
-import ReactLoading from 'react-loading';
-import WinLose from '../buttons/winLose';
-import LeaderBoard from '../activeTournament/LeaderBoard';
-import Footer from '../pageElements/footer';
-import DeletePlayer from '../buttons/deletePlayer';
+import { useCallback, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import isEmpty from "../functions/checkEmpty";
+import doWeHaveToken from "../functions/checkIfAutorized";
+import Header from "../pageElements/header";
+import ReactLoading from "react-loading";
+import WinLose from "../buttons/winLose";
+import LeaderBoard from "../activeTournament/LeaderBoard";
+import Footer from "../pageElements/footer";
+import DeletePlayer from "../buttons/deletePlayer";
 
-import ShowFacts from '../buttons/ShowFacts';
+import ShowFacts from "../buttons/ShowFacts";
 
 import {
   Accordion,
   AccordionItem,
   AccordionButton,
   AccordionPanel,
-} from '@chakra-ui/react';
-import ChangeWinner from '../buttons/changeWinner';
+} from "@chakra-ui/react";
+import ChangeWinner from "../buttons/changeWinner";
 
 async function tournamentDetails(id) {
-  const token = sessionStorage.getItem('token');
+  const token = sessionStorage.getItem("token");
   try {
     const req = await fetch(
       `http://localhost:8189/api/v1/app/tournament/tourney/bracket/${id}`,
       {
-        method: 'GET',
+        method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
+          "Content-Type": "application/json",
+          Accept: "application/json",
         },
       }
     );
     const res = await req.json();
     return res;
   } catch {
-    console.log('error');
+    console.log("error");
   }
 }
 
@@ -48,7 +48,7 @@ export default function ActiveTournamentPage() {
       const data = await tournamentDetails(id);
       setTable(data);
     } catch {
-      console.log('error');
+      console.log("error");
     }
   }, [id]);
 
@@ -56,15 +56,15 @@ export default function ActiveTournamentPage() {
     try {
       getTournament();
     } catch {
-      console.log('error');
+      console.log("error");
     }
   }, [getTournament]);
 
   if (doWeHaveToken() && !isEmpty(tournamentTable)) {
     const startedDate = new Date(tournamentTable.startedDate);
     let test = new Date(startedDate.setDate(startedDate.getDate() - 1));
-    const user = sessionStorage.getItem('user');
-    const login = sessionStorage.getItem('login');
+    const user = sessionStorage.getItem("user");
+    const login = sessionStorage.getItem("login");
     return (
       <div className="activeTournamentPage">
         <Header />
@@ -97,10 +97,10 @@ export default function ActiveTournamentPage() {
                   } else {
                     test = new Date(test.setDate(test.getDate() + 1));
                   }
-                  const dateResult = test.toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric',
+                  const dateResult = test.toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
                   });
                   return (
                     <AccordionItem
@@ -471,7 +471,7 @@ export default function ActiveTournamentPage() {
   return (
     <div className="activeTournamentPage">
       <Header />
-      <ReactLoading color={'orange'} className="center" />
+      <ReactLoading color={"orange"} className="center" />
       <Footer />
     </div>
   );

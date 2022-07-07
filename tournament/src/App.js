@@ -5,6 +5,7 @@ import Footer from "./components/pageElements/footer";
 import Header from "./components/pageElements/header";
 import Tournaments from "./components//openTournament/Tournaments";
 import LastFact from "./components/functions/LastFact";
+import EndedTournaments from "./components/activeTournament/endedTournaments";
 
 function App() {
   if (doWeHaveToken()) {
@@ -32,6 +33,10 @@ function App() {
           <h2>Active Tournaments</h2>
         </div>
         <ActiveTournaments />
+        <div className="mainPageTitle">
+          <h2>Ended Tournaments</h2>
+        </div>
+        <EndedTournaments />
         <Footer />
       </div>
     );
@@ -55,6 +60,10 @@ function App() {
         <h2>Active Tournaments</h2>
       </div>
       <ActiveTournaments />
+      <div className="mainPageTitle">
+        <h2>Ended Tournaments</h2>
+      </div>
+      <EndedTournaments />
       <Footer />
     </div>
   );
