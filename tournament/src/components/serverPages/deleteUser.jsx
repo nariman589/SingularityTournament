@@ -37,12 +37,10 @@ export default function DeletetUser() {
               onSubmit={async (values) => {
                 try {
                   const token = sessionStorage.getItem('token');
-
                   const req = await fetch(
-                    'http://localhost:8189/api/v1/app/admin/delete-user',
+                    `http://localhost:8189/api/v1/app/admin/delete-user?username=${values.username}&surname=${values.surname}`,
                     {
                       method: 'PUT',
-                      body: JSON.stringify(values, null, 2),
                       headers: {
                         'Content-Type': 'application/json',
                         Accept: 'application/json',
