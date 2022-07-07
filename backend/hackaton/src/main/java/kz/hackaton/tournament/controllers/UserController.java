@@ -1,5 +1,4 @@
 package kz.hackaton.tournament.controllers;
-
 import kz.hackaton.tournament.dto.UserDto;
 import kz.hackaton.tournament.dto.UserFullDto;
 import kz.hackaton.tournament.entities.User;
