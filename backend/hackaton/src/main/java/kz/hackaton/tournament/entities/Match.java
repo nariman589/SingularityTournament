@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "match")
@@ -24,6 +25,8 @@ public class Match {
 
     @Column(name = "winner")
     private Long winner;
+    @Column(name = "match_date")
+    private LocalDate date;
 
     @ManyToOne
     @JoinColumn(name = "round_id")

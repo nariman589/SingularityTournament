@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -109,17 +110,21 @@ public class TournamentService {
         User userFromDto = userService.findUserBySurnameAndName(winnerResult.getSurname(), winnerResult.getName());
 
         Tournament tournament = tournamentRepositories.findById(winnerResult.getTournamentId()).get();
-        LocalDate startedDate = tournament.getStartedDate();
+//        LocalDate startedDate = tournament.getStartedDate();
         LocalDate now = LocalDate.now();
-        if (ChronoUnit.DAYS.between(startedDate, now) + 1 != winnerResult.getStage()) {
-            throw new TournamentException("You cannot change past/future details \n" +
-                    "Days between : " + ChronoUnit.DAYS.between(now, startedDate) + "\n" +
-                    "Stage : " + winnerResult.getStage());
-        }
+//        if (ChronoUnit.DAYS.between(startedDate, now) + 1 != winnerResult.getStage()) {
+//            throw new TournamentException("You cannot change past/future details \n" +
+//                    "Days between : " + ChronoUnit.DAYS.between(now, startedDate) + "\n" +
+//                    "Stage : " + winnerResult.getStage());
+//        }
         List<Match> matchList = tournament.getRoundList().get(winnerResult.getStage() - 1).getMatchList();
 
 
         for (Match m : matchList) {
+            if(!m.getDate().equals(now)) {
+                throw new TournamentException("You cannot change past/future details \n" +
+                        "Stage : " + winnerResult.getStage());
+            }
             if (m.getUser1().equals(userFromDto.getId()) || m.getUser2().equals(userFromDto.getId())) {
                 if (m.getUser1().equals(userFromLogin.getId()) || m.getUser2().equals(userFromLogin.getId())) {
                     if (m.getWinner() != null) {
@@ -313,26 +318,37 @@ public class TournamentService {
         }
 
         int userCount = users.size();
+        int day = 0;
         for (int i = 0; i < userCount - 1; i++) {
             Round round = new Round();
             round.setStage(i + 1);
             List<Match> matchList = new ArrayList<>();
+
+            if(tournament.getStartedDate().plusDays(day).getDayOfWeek().equals(DayOfWeek.SATURDAY)) {
+                day++;
+            }
+            if(tournament.getStartedDate().plusDays(day).getDayOfWeek().equals(DayOfWeek.SUNDAY)) {
+                day++;
+            }
+
             for (int j = 0; j < userCount / 2; j++) {
                 //if bot then continue
-                if (users.get(j).getMajor().equals(bot.getMajor()) ||
-                        users.get(userCount - 1 - j).getMajor().equals(bot.getMajor())) {
+                if (users.get(j).getMajor().equals(bot.getMajor()) || users.get(userCount - 1 - j).getMajor().equals(bot.getMajor())) {
                     continue;
                 }
 
                 Match match = new Match();
+
+                match.setDate(tournament.getStartedDate().plusDays(day));
                 match.setUser1(users.get(j).getId());
                 match.setUser2(users.get(userCount - 1 - j).getId());
                 match.setRound(round);
                 matchList.add(match);
                 matchService.save(match);
 
-            }
 
+            }
+            day++;
             round.setMatchList(matchList);
             round.setTournament(tournament);
             roundList.add(round);

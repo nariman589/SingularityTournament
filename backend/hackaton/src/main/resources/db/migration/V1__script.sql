@@ -58,6 +58,7 @@ create table match
     user_id2 BIGINT,
     winner bigint,
     round_id bigint,
+    match_date date,
     foreign key (round_id) references round (id)
 
 );

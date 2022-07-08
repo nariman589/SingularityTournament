@@ -3,7 +3,7 @@ package kz.hackaton.tournament.services;
 import kz.hackaton.tournament.controllers.UserDTO;
 import kz.hackaton.tournament.entities.User;
 import kz.hackaton.tournament.repositories.UserRepository;
-import kz.hackaton.tournament.services.security.CustomUserDetailsService;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,10 +17,10 @@ import org.springframework.stereotype.Service;
 public class AuthServices {
     private final UserRepository userRepository;
     private final AuthenticationManager authenticationManager;
-    private final CustomUserDetailsService customUserDetailsService;
+
 
     public void registration(UserDTO userDTO) {
-       if(userRepository.findByName(userDTO.getUsername()).isPresent()) {
+       if(userRepository.findUserByLogin(userDTO.getUsername()).isPresent()) {
            throw new RuntimeException("user already exist");
        }
         User user = new User();
